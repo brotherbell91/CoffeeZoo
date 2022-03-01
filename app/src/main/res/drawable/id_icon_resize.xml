@@ -4,6 +4,6 @@
     <item
         android:width="30dp"
         android:height="30dp"
-        android:drawable="@mipmap/ic_launcher" />
+        android:drawable="@drawable/id_icon" />
 
 </layer-list>

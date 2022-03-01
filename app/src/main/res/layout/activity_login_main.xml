@@ -40,7 +40,7 @@
             android:textSize="16sp"
             android:hint="비밀번호"
             android:inputType="textPassword"
-            android:drawableStart="@drawable/id_icon_resize"
+            android:drawableStart="@drawable/pw_icon_resize"
             android:drawablePadding="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
