@@ -18,18 +18,14 @@ class LoginMainActivity : AppCompatActivity() {
             var inputId = edtInputId.text.toString()
             var inputPw = edtInputPw.text.toString()
 
+            val myIntent = Intent(this,MainActivity::class.java)
+
 //            맞다면
             if (inputId == "admin" && inputPw == "qwer") {
 
                 Toast.makeText(this, "관리자님 환영합니다.", Toast.LENGTH_SHORT).show()
 
-                btnLogin.setOnClickListener {
-
-                    val myIntent = Intent(this,MainActivity::class.java)
-
-                    startActivity(myIntent)
-
-                }
+                startActivity(myIntent)
 
             }
 //            아이디가 틀리다면
