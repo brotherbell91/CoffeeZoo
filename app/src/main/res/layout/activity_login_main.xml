@@ -28,6 +28,7 @@
         android:layout_height="wrap_content" >
 
         <EditText
+            android:id="@+id/edtInputId"
             android:textSize="16sp"
             android:hint="이메일"
             android:inputType="textEmailAddress"
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/edtInputPw"
             android:textSize="16sp"
             android:hint="비밀번호"
             android:inputType="textPassword"
@@ -54,6 +56,7 @@
         android:layout_marginTop="25dp" >
 
         <Button
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -103,20 +106,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_margin="10dp">
 
             <Button
-                android:layout_gravity="center_horizontal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/kakao_login_icon" />
+                android:background="@drawable/kakao_login_icon_resize"
+                android:gravity="center" />
 
             <TextView
                 android:layout_margin="5dp"
@@ -132,13 +135,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:layout_margin="10dp">
 
             <Button
-                android:layout_gravity="center_horizontal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/naver_login_icon" />
+                android:background="@drawable/naver_login_icon_resize"
+                android:gravity="center" />
 
             <TextView
                 android:layout_margin="5dp"
@@ -154,13 +158,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:layout_margin="10dp">
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/google_login_icon" />
+                android:background="@drawable/google_login_icon_resize"
+                android:gravity="center" />
 
             <TextView
                 android:layout_margin="5dp"
@@ -176,13 +181,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:layout_margin="10dp">
 
             <Button
-                android:layout_gravity="center_horizontal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/apple_login_icon" />
+                android:background="@drawable/apple_login_icon_resize"
+                android:gravity="center" />
 
             <TextView
                 android:layout_margin="5dp"
