@@ -1,22 +1,33 @@
 package com.hyeongjong.coffeezoo.Login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
-import kotlinx.android.synthetic.main.activity_login_main.*
+import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
 
-class LoginMainActivity : AppCompatActivity() {
+class LoginMainActivity : BaseActivity() {
+
+    lateinit var binding : ActivityLoginMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_main)
 
-//        로그인 버튼 구현
-        btnLogin.setOnClickListener {
-            var inputId = edtInputId.text.toString()
-            var inputPw = edtInputPw.text.toString()
+        setupEvents()
+        setValues()
+
+    }
+
+    override fun setupEvents() {
+
+        //        로그인 버튼 구현
+        binding.btnLogin.setOnClickListener {
+            var inputId = binding.edtInputId.text.toString()
+            var inputPw = binding.edtInputPw.text.toString()
 
             val myIntent = Intent(this,MainActivity::class.java)
 
@@ -40,5 +51,10 @@ class LoginMainActivity : AppCompatActivity() {
             }
 
         }
+
+    }
+
+    override fun setValues() {
+
     }
 }

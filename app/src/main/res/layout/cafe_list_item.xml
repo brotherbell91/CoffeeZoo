@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:src="@drawable/coffeezoo_logo"
+            android:scaleType="centerCrop"/>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/txtItemCafeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="상호명" />
+
+                <com.willy.ratingbar.ScaleRatingBar
+                    android:id="@+id/ratingBarCafeScore"
+                    android:paddingStart="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_starWidth="20dp"
+                    app:srb_starHeight="20dp"
+                    app:srb_starPadding="2dp"
+                    app:srb_stepSize="0.5"
+                    app:srb_isIndicator="true" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtItemCafeAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="경기도 성남시 중원구" />
+
+            <TextView
+                android:id="@+id/txtItemCafeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="설명 문구 자리" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
