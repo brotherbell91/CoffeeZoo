@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyeongjong.coffeezoo.CafeDetailViewActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.adapters.CafeStoreListAdapter
-import com.hyeongjong.coffeezoo.app.OnClickListener
+import com.hyeongjong.coffeezoo.app.OnCafeClickListener
 import com.hyeongjong.coffeezoo.databinding.FragmentThisMonthListBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
 
@@ -20,8 +20,8 @@ class ThisMonthListFragment : BaseFragment() {
     var mCafeStoreList = ArrayList<CafeData>()
     lateinit var mCafeStoreListAdapter : CafeStoreListAdapter
 
-    val listener = object : OnClickListener{
-        override fun onClickEvent(cafe: CafeData) {
+    val listener = object : OnCafeClickListener{
+        override fun onCafeClickEvent(cafe: CafeData) {
             val clickedCafe = cafe
             val myIntent = Intent(requireContext(), CafeDetailViewActivity::class.java)
             myIntent.putExtra("clickedCafeDetail", clickedCafe)

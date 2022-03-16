@@ -12,7 +12,7 @@ class CafeData(
 
 
     companion object {
-
+//          카페 데이터
         fun thisMonthList(): ArrayList<CafeData> {
             val cafeList = ArrayList<CafeData>()
             cafeList.clear()

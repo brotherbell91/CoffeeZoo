@@ -2,6 +2,7 @@ package com.hyeongjong.coffeezoo
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.adapters.MainViewPagerAdapter
 import com.hyeongjong.coffeezoo.databinding.ActivityMainBinding
@@ -21,12 +22,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents(){
+//      btnMainSearch에 text입력 막기
+        binding.btnMainSearch.isFocusable = false
 
         binding.btnMainSearch.setOnClickListener {
 
             val myIntent = Intent(this, SearchBarActivity::class.java)
-            val inputSentence = binding.btnMainSearch.text.toString()
-            myIntent.putExtra("inputSentence", inputSentence)
+
             startActivity(myIntent)
         }
 
