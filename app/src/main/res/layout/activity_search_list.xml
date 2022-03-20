@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".SearchBarActivity">
+        tools:context=".SearchListActivity">
 
         <EditText
             android:id="@+id/EdtMainSearch"
@@ -74,7 +74,7 @@
             android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSearchList"
+            android:id="@+id/searchListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

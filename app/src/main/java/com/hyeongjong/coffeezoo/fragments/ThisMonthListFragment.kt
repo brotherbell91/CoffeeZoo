@@ -1,33 +1,32 @@
 package com.hyeongjong.coffeezoo.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hyeongjong.coffeezoo.CafeDetailViewActivity
 import com.hyeongjong.coffeezoo.R
-import com.hyeongjong.coffeezoo.adapters.CafeStoreListAdapter
-import com.hyeongjong.coffeezoo.app.OnCafeClickListener
+import com.hyeongjong.coffeezoo.adapters.ThisMonthListAdapter
 import com.hyeongjong.coffeezoo.databinding.FragmentThisMonthListBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
 
 class ThisMonthListFragment : BaseFragment() {
 
     lateinit var binding : FragmentThisMonthListBinding
-    var mCafeStoreList = ArrayList<CafeData>()
-    lateinit var mCafeStoreListAdapter : CafeStoreListAdapter
 
-    val listener = object : OnCafeClickListener{
-        override fun onCafeClickEvent(cafe: CafeData) {
-            val clickedCafe = cafe
-            val myIntent = Intent(requireContext(), CafeDetailViewActivity::class.java)
-            myIntent.putExtra("clickedCafeDetail", clickedCafe)
-            startActivity(myIntent)
-        }
-    }
+    var mCafeStoreList = ArrayList<CafeData>()
+
+    lateinit var mAdapter : ThisMonthListAdapter
+
+//    val listener = object : OnCafeClickListener{
+//        override fun onCafeClickEvent(cafe: CafeData) {
+//            val clickedCafe = cafe
+//            val myIntent = Intent(requireContext(), CafeDetailViewActivity::class.java)
+//            myIntent.putExtra("clickedCafeDetail", clickedCafe)
+//            startActivity(myIntent)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,18 +50,15 @@ class ThisMonthListFragment : BaseFragment() {
     }
 
     override fun setValues() {
-
-        binding.recyclerViewStoreList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-//        임시 카페 데이터
+//      리싸이클러뷰 연결
+        //        임시 카페 데이터
         mCafeStoreList = CafeData.thisMonthList()
 
-        binding.recyclerViewStoreList.setHasFixedSize(true)
-        mCafeStoreListAdapter = CafeStoreListAdapter(mCafeStoreList)
+        mAdapter = ThisMonthListAdapter(mContext, mCafeStoreList)
 
-        binding.recyclerViewStoreList.adapter = mCafeStoreListAdapter
+        binding.thisMonthRecyclerView.adapter = mAdapter
 
-        mCafeStoreListAdapter.setListener(listener)
+        binding.thisMonthRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }
 }

@@ -10,6 +10,8 @@ class CafeDetailViewActivity : BaseActivity() {
 
     lateinit var binding: ActivityCafeDetailViewBinding
 
+    lateinit var mCafeData : CafeData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_cafe_detail_view)
@@ -25,12 +27,12 @@ class CafeDetailViewActivity : BaseActivity() {
 
     override fun setValues() {
 
-        val cafeData = intent.getSerializableExtra("clickedCafeDetail") as CafeData
+        mCafeData = intent.getSerializableExtra("clickedCafeDetail") as CafeData
 
-        binding.txtDetailCafeName.text = cafeData.cafeName
-        binding.txtDetailCafeAddress.text = cafeData.cafeAddress
-        binding.txtDetailCafeDescription.text = cafeData.cafeDescription
-        binding.ratingBarDetailCafeScore.rating = cafeData.score.toFloat()
+        binding.txtDetailCafeName.text = mCafeData.cafeName
+        binding.txtDetailCafeAddress.text = mCafeData.cafeAddress
+        binding.txtDetailCafeDescription.text = mCafeData.cafeDescription
+        binding.ratingBarDetailCafeScore.rating = mCafeData.score.toFloat()
 
     }
 }

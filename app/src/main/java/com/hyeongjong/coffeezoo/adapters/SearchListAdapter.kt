@@ -1,52 +1,50 @@
 package com.hyeongjong.coffeezoo.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hyeongjong.coffeezoo.R
-import com.hyeongjong.coffeezoo.app.OnCafeClickListener
-import com.hyeongjong.coffeezoo.app.OnSearchClickListener
 import com.hyeongjong.coffeezoo.datas.SearchData
 
 
-data class SearchListAdapter(var searchList : ArrayList<SearchData>) : RecyclerView.Adapter<SearchListAdapter.CustomViewHolder>() {
+data class SearchListAdapter(
+    var mContext : Context,
+    val mList : List<SearchData>,
+) : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>() {
 
-    private var listener: OnSearchClickListener? = null
+    inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
+        val txtSearchText = view.findViewById<TextView>(R.id.txtSearchText) //검색어
+        val txtSearchDate = view.findViewById<TextView>(R.id.txtSearchDate) //검색날짜
 
-    fun setListener(onSearchClickListener: OnSearchClickListener) {
-        this.listener = onSearchClickListener
-    }
+        fun bind(data : SearchData) {
 
-//  뷰홀더가 메모리에 올라갔을 때 뷰홀더와 레이아웃을 연결 시켜준다
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchListAdapter.CustomViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_list_item, parent, false)
-        return CustomViewHolder(view)
+            txtSearchText.text = data.search
+            txtSearchDate.text = data.date
 
-    }
-
-    override fun getItemCount(): Int {
-        return searchList.size
-    }
-
-    override fun onBindViewHolder(holder: SearchListAdapter.CustomViewHolder, position: Int) {
-        holder.txtSearchText.text = searchList.get(position).search
-        holder.txtSearchDate.text = searchList.get(position).date
-
-//        Custom OnClickListener Event
-        holder.itemView.setOnClickListener(View.OnClickListener {
-            if (listener != null) {
-                listener!!.onSearchClickEvent(searchList[position])
-            }
-        })
-    }
-
-    class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val txtSearchText = itemView.findViewById<TextView>(R.id.txtSearchText) //검색어
-        val txtSearchDate = itemView.findViewById<TextView>(R.id.txtSearchDate) //검색날짜
+        }
 
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+
+        val view = LayoutInflater.from(mContext).inflate(R.layout.search_list_item, parent, false)
+        return MyViewHolder(view)
+
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+//        실제 출력할 데이터
+
+        val data = mList[position]
+
+//        MyViewHolder도 일종의 클래스 : 멤버변수 / 함수를 가지고 있을 수 있다. => 활용하자.
+        holder.bind( data )
+
+    }
+
+    override fun getItemCount() = mList.size // 목록의 갯수가 리턴.
 
 }

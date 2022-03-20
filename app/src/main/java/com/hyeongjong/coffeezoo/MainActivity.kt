@@ -2,10 +2,12 @@ package com.hyeongjong.coffeezoo
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.adapters.MainViewPagerAdapter
 import com.hyeongjong.coffeezoo.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
@@ -27,9 +29,11 @@ class MainActivity : BaseActivity() {
 
         binding.btnMainSearch.setOnClickListener {
 
-            val myIntent = Intent(this, SearchBarActivity::class.java)
+            val myIntent = Intent(this, SearchListActivity::class.java)
 
             startActivity(myIntent)
+
+
         }
 
     }

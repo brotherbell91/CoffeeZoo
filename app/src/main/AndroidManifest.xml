@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeZoo">
         <activity
-            android:name=".SearchBarActivity"
+            android:name=".SearchListActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
