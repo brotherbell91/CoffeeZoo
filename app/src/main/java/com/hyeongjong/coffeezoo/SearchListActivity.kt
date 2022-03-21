@@ -3,18 +3,15 @@ package com.hyeongjong.coffeezoo
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyeongjong.coffeezoo.adapters.SearchListAdapter
 import com.hyeongjong.coffeezoo.databinding.ActivitySearchListBinding
-import com.hyeongjong.coffeezoo.datas.CafeData
 import com.hyeongjong.coffeezoo.datas.SearchData
 import com.hyeongjong.coffeezoo.utils.ContextUtil
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class SearchListActivity : BaseActivity() {
 
@@ -71,6 +68,12 @@ class SearchListActivity : BaseActivity() {
         binding.searchListRecyclerView.adapter = mAdapter
 
         binding.searchListRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+//        item 역순으로 정렬
+        val linearLayoutManager = LinearLayoutManager(mContext)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+        binding.searchListRecyclerView.setLayoutManager(linearLayoutManager)
 
     }
 

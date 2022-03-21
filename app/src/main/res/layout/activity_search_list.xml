@@ -54,9 +54,10 @@
 
             <ImageView
                 android:id="@+id/btnSearchAllDelete"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_delete_forever_24"/>
+                android:padding="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/trashcan_icon"/>
 
         </LinearLayout>
 

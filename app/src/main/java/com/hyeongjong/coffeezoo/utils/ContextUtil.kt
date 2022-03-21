@@ -61,7 +61,7 @@ class ContextUtil {
                         val jSonObj = jSonArray.getJSONObject(i)
                         val search = jSonObj.getString("search")
                         val date = jSonObj.getString("date")
-                        searchHistory.add(SearchData(search, date))
+                        searchHistory.add(SearchData(search,date))
                     }
 
                 }catch (e : JSONException) {
