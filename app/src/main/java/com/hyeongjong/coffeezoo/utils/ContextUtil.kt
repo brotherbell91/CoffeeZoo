@@ -7,6 +7,7 @@ import android.service.autofill.UserData
 import com.hyeongjong.coffeezoo.datas.SearchData
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 
 
 class ContextUtil {
@@ -23,14 +24,17 @@ class ContextUtil {
 
 //        setter
 
-        fun setSearchHistory( context : Context, searchHistory : ArrayList<String> ){
+        fun setSearchHistory( context : Context, searchHistory : ArrayList<SearchData> ){
 
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
             val jSonArray = JSONArray()
 
             for ( i in 0 until searchHistory.size ){
-                jSonArray.put(searchHistory[i])
+                val jSonObj = JSONObject()
+                jSonObj.put("search",searchHistory[i].search)
+                jSonObj.put("date",searchHistory[i].date)
+                jSonArray.put(jSonObj)
             }
             if (!searchHistory.isEmpty()) {
                 pref.edit().putString(SEARCH_HISTORY,jSonArray.toString()).apply()
@@ -42,27 +46,29 @@ class ContextUtil {
         }
 
 //        getter
-        fun getSearchHistory( context : Context) : ArrayList<String> {
+        fun getSearchHistory( context : Context) : ArrayList<SearchData> {
 
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
-            val json = pref.getStringSet(SEARCH_HISTORY, null)
+            val json = pref.getString(SEARCH_HISTORY, null)
 
-            val urls = ArrayList<String>()
+            val searchHistory = ArrayList<SearchData>()
 
             if (json != null) {
                 try {
                     val jSonArray = JSONArray(json)
                     for (i in 0 until jSonArray.length()){
-                        val url = jSonArray.optString(i)
-                        urls.add(url)
+                        val jSonObj = jSonArray.getJSONObject(i)
+                        val search = jSonObj.getString("search")
+                        val date = jSonObj.getString("date")
+                        searchHistory.add(SearchData(search, date))
                     }
 
                 }catch (e : JSONException) {
                     e.printStackTrace()
                 }
             }
-            return urls
+            return searchHistory
         }
 
     }
