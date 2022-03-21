@@ -2,6 +2,8 @@ package com.hyeongjong.coffeezoo.utils
 
 import android.content.Context
 import android.preference.PreferenceManager
+import android.provider.ContactsContract
+import android.service.autofill.UserData
 import com.hyeongjong.coffeezoo.datas.SearchData
 import org.json.JSONArray
 import org.json.JSONException
@@ -44,7 +46,7 @@ class ContextUtil {
 
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
-            val json = pref.getString(SEARCH_HISTORY, null)
+            val json = pref.getStringSet(SEARCH_HISTORY, null)
 
             val urls = ArrayList<String>()
 
@@ -64,4 +66,5 @@ class ContextUtil {
         }
 
     }
+
 }

@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyeongjong.coffeezoo.adapters.SearchListAdapter
 import com.hyeongjong.coffeezoo.databinding.ActivitySearchListBinding
+import com.hyeongjong.coffeezoo.datas.CafeData
 import com.hyeongjong.coffeezoo.datas.SearchData
+import com.hyeongjong.coffeezoo.utils.ContextUtil
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -62,6 +64,8 @@ class SearchListActivity : BaseActivity() {
     fun getSearchHistory() {
 //      리싸이클러뷰 연결
 
+        mSearchList = ContextUtil.getSearchHistory(mContext)
+
         mAdapter = SearchListAdapter(mContext, mSearchList)
 
         binding.searchListRecyclerView.adapter = mAdapter
@@ -85,6 +89,8 @@ class SearchListActivity : BaseActivity() {
         val inputSearchText = binding.EdtMainSearch.text.toString()
 //                ArrayList에 데이터 저장
         mSearchList.add(SearchData(inputSearchText,inputSearchDate))
+//                쉐어드 프리퍼런시스에 데이터 저장
+        ContextUtil.setSearchHistory(mContext,mSearchList)
 
     }
 
