@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.hyeongjong.coffeezoo.fragments.ThisMonthListFragment
 import com.hyeongjong.coffeezoo.fragments.PhotoListFragment
 
-class MainViewPagerAdapter( fm : FragmentManager) : FragmentPagerAdapter(fm){
+class MainHomeFragmentViewPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm){
     override fun getCount() = 2
 
 

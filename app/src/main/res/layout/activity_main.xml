@@ -22,16 +22,17 @@
                 android:textCursorDrawable="@color/main"
                 android:singleLine="true"/>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/mainTabLayout"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mainViewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/mainBottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/main" />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/mainViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            app:menu="@menu/bottom_nav_menu"/>
 
     </LinearLayout>
 
