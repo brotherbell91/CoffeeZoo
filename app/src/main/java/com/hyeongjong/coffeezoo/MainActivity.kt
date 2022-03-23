@@ -2,9 +2,7 @@ package com.hyeongjong.coffeezoo
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.viewpager2.widget.ViewPager2
 import com.hyeongjong.coffeezoo.adapters.MainViewPager2Adapter
 import com.hyeongjong.coffeezoo.databinding.ActivityMainBinding
 

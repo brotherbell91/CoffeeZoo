@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.adapters.MainHomeFragmentViewPagerAdapter
 import com.hyeongjong.coffeezoo.databinding.FragmentMainHomeBinding
@@ -44,6 +43,8 @@ class MainHomeFragment : BaseFragment() {
         binding.mainHomeViewPager.adapter = mAdapter
 
         binding.mainHomeTabLayout.setupWithViewPager(binding.mainHomeViewPager)
+
+        binding.mainHomeViewPager.offscreenPageLimit = 2
 
 
 

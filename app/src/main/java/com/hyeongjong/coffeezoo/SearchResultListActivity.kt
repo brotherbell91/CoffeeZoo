@@ -1,6 +1,5 @@
 package com.hyeongjong.coffeezoo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.databinding.ActivitySearchListBinding
