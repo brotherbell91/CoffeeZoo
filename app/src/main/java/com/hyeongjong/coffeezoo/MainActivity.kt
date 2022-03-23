@@ -2,6 +2,8 @@ package com.hyeongjong.coffeezoo
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.adapters.MainViewPager2Adapter
 import com.hyeongjong.coffeezoo.databinding.ActivityMainBinding
@@ -40,10 +42,14 @@ class MainActivity : BaseActivity() {
 
             binding.mainViewPager2.currentItem = when ( it.itemId) {
                 R.id.home -> {
+//                    홈버튼 누르면 검색바 표시
+                    binding.btnMainSearch.isVisible = true
                     0
                 }
                 else ->
                 {
+//                    마이페이지 누르면 검색바 숨기기
+                    binding.btnMainSearch.isVisible = false
                     1
                 }
 
@@ -61,6 +67,9 @@ class MainActivity : BaseActivity() {
         binding.mainViewPager2.offscreenPageLimit = 2
 //        뷰페이저2 Swipe막기
         binding.mainViewPager2.setUserInputEnabled(false);
+//        메인화면에 검색바 표시
+        binding.btnMainSearch.isVisible = true
+
     }
 
 }
