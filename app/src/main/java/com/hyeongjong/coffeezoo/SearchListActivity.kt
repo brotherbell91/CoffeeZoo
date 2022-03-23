@@ -49,6 +49,12 @@ class SearchListActivity : BaseActivity() {
                 mAdapter.notifyDataSetChanged()
 
             }
+//            setOnKeyListener에 backPressed 이벤트가 들어있어 백버튼을 다시 만들어줘야 한다
+            else if(keyCode==KeyEvent.KEYCODE_BACK){
+
+                onBackPressed()
+
+            }
             true
         }
 
