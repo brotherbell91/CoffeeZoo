@@ -1,13 +1,16 @@
 package com.hyeongjong.coffeezoo.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hyeongjong.coffeezoo.CafeDetailViewActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.adapters.ThisMonthListAdapter
+import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.databinding.FragmentThisMonthListBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
 
@@ -18,15 +21,6 @@ class ThisMonthListFragment : BaseFragment() {
     var mCafeStoreList = ArrayList<CafeData>()
 
     lateinit var mAdapter : ThisMonthListAdapter
-
-//    val listener = object : OnCafeClickListener{
-//        override fun onCafeClickEvent(cafe: CafeData) {
-//            val clickedCafe = cafe
-//            val myIntent = Intent(requireContext(), CafeDetailViewActivity::class.java)
-//            myIntent.putExtra("clickedCafeDetail", clickedCafe)
-//            startActivity(myIntent)
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,18 +41,31 @@ class ThisMonthListFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+//        임시 데이터 연결
+        mCafeStoreList = CafeData.thisMonthList()
+        mAdapter = ThisMonthListAdapter(mContext, mCafeStoreList)
+        mAdapter.oic = object : OnItemClick{
+            override fun onItemClick(position: Int) {
+
+                val clickCafeStore = mCafeStoreList[position]
+
+                val myIntent = Intent(mContext, CafeDetailViewActivity::class.java)
+                myIntent.putExtra("clickedCafeDetail", clickCafeStore)
+                startActivity(myIntent)
+
+            }
+
+        }
+
     }
 
     override fun setValues() {
+
 //      리싸이클러뷰 연결
-        //        임시 카페 데이터
-        mCafeStoreList = CafeData.thisMonthList()
-
-        mAdapter = ThisMonthListAdapter(mContext, mCafeStoreList)
-
         binding.thisMonthRecyclerView.adapter = mAdapter
-
         binding.thisMonthRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }
+
+
 }

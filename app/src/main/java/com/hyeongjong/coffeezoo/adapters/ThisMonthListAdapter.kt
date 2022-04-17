@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hyeongjong.coffeezoo.R
+import com.hyeongjong.coffeezoo.app.OnItemClick
+import com.hyeongjong.coffeezoo.app.OnItemLongClick
 import com.hyeongjong.coffeezoo.datas.CafeData
 import com.willy.ratingbar.BaseRatingBar
 
@@ -15,7 +17,10 @@ data class ThisMonthListAdapter(
     var mList : List<CafeData>,
 ) : RecyclerView.Adapter<ThisMonthListAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    var oic : OnItemClick? = null
+    var oilc : OnItemLongClick? = null
+
+    inner class MyViewHolder(val view : View) : RecyclerView.ViewHolder(view){
 
         val cafeName = view.findViewById<TextView>(R.id.txtItemCafeName) //카페이름
         val cafeAddress = view.findViewById<TextView>(R.id.txtItemCafeAddress) //카페주소
@@ -28,6 +33,19 @@ data class ThisMonthListAdapter(
             cafeAddress.text = data.cafeAddress //카페주소
             cafeDescription.text = data.cafeDescription //카페설명
             ratingBarCafeScore.rating = data.score.toFloat() //카페별점
+
+            if (oic != null) {
+                view.setOnClickListener {
+                    oic!!.onItemClick(position)
+                }
+            }
+
+            if (oilc != null) {
+                view.setOnLongClickListener {
+                    oilc!!.onItemLongClick(position)
+                    return@setOnLongClickListener true
+                }
+            }
 
         }
     }
