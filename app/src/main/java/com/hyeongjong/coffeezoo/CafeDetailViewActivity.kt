@@ -1,7 +1,13 @@
 package com.hyeongjong.coffeezoo
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import com.hyeongjong.coffeezoo.databinding.ActivityCafeDetailViewBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
 
@@ -23,10 +29,31 @@ class CafeDetailViewActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.txtDetailCafeNumber.setOnClickListener {
 
+            val pl = object : PermissionListener {
+                override fun onPermissionGranted() {
 
+                    val myUri = Uri.parse("tel:${mCafeData.cafeNumber}")
+                    val myIntent = Intent(Intent.ACTION_CALL,myUri)
+                    startActivity(myIntent)
+                }
 
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
 
+                    Toast.makeText(this@CafeDetailViewActivity,
+                        "전화 연결을 하려면, 권한이 필요합니다.",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            TedPermission.create()
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.CALL_PHONE)
+                .check()
+
+        }
     }
 
     override fun setValues() {
