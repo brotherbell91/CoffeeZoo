@@ -64,7 +64,7 @@ class CafeDetailViewActivity : BaseActivity() {
 
         }
 
-        binding.map.setOnClickListener {
+        binding.txtDetailCafeAddress.setOnClickListener {
 
             val myIntent = Intent(this, CafeMapActivity::class.java)
             startActivity(myIntent)

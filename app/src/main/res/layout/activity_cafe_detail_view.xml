@@ -112,13 +112,6 @@
                                 android:textSize="18sp"
                                 android:textColor="@color/black" />
 
-                            <ImageView
-                                android:id="@+id/map"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:padding="5dp"
-                                android:src="@drawable/map_icon" />
-
                         </LinearLayout>
 
                         <LinearLayout
