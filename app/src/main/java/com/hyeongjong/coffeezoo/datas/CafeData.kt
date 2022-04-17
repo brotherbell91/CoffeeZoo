@@ -18,7 +18,7 @@ class CafeData(
         fun thisMonthList(): ArrayList<CafeData> {
             val cafeList = ArrayList<CafeData>()
             cafeList.clear()
-            cafeList.add(CafeData("세가지", "https://www.instagram.com/3egaji/", "경기도 성남시", "0507-1346-1847", "애견동반 가능",4.5))
+            cafeList.add(CafeData("세가지", "https://www.instagram.com/3egaji/", "경기 성남시 중원구 둔촌대로64번길 4-4 1층", "0507-1346-1847", "애견동반 가능",4.5))
 
 
             return cafeList

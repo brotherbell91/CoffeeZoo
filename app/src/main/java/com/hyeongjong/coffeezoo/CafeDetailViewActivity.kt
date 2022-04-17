@@ -64,6 +64,13 @@ class CafeDetailViewActivity : BaseActivity() {
 
         }
 
+        binding.map.setOnClickListener {
+
+            val myIntent = Intent(this, CafeMapActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {
