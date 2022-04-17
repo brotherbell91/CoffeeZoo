@@ -76,6 +76,7 @@
                                 android:textColor="@color/black"/>
 
                             <ImageView
+                                android:id="@+id/insta"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:padding="5dp"
@@ -88,6 +89,7 @@
 
 
                             <ImageView
+                                android:id="@+id/save"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:padding="5dp"
@@ -111,10 +113,28 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
+                                android:id="@+id/map"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:padding="5dp"
                                 android:src="@drawable/map_icon" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp">
+
+                            <TextView
+                                android:id="@+id/txtDetailCafeNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="02-000-0000"
+                                android:textSize="18sp"
+                                android:textColor="@color/black" />
 
                         </LinearLayout>
 

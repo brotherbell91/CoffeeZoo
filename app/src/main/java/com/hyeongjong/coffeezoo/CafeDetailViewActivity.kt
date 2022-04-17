@@ -23,6 +23,10 @@ class CafeDetailViewActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+
+
+
+
     }
 
     override fun setValues() {
@@ -31,6 +35,7 @@ class CafeDetailViewActivity : BaseActivity() {
 
         binding.txtDetailCafeName.text = mCafeData.cafeName
         binding.txtDetailCafeAddress.text = mCafeData.cafeAddress
+        binding.txtDetailCafeNumber.text = mCafeData.cafeNumber
         binding.txtDetailCafeDescription.text = mCafeData.cafeDescription
         binding.ratingBarDetailCafeScore.rating = mCafeData.score.toFloat()
 
