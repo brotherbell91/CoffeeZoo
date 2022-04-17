@@ -54,6 +54,16 @@ class CafeDetailViewActivity : BaseActivity() {
                 .check()
 
         }
+
+        binding.insta.setOnClickListener {
+
+            val myUri = Uri.parse("${mCafeData.cafeInsta}")
+            val myIntent = Intent(Intent.ACTION_VIEW, myUri)
+
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {
