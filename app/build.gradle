@@ -55,6 +55,6 @@ dependencies {
 
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
-
+    implementation 'com.naver.maps:map-sdk:3.14.0'
 
 }

@@ -40,6 +40,10 @@
         <activity
             android:name=".Login.LoginMainActivity"
             android:exported="true" />
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="uy9b6z173d" />
+
     </application>
 
 </manifest>
