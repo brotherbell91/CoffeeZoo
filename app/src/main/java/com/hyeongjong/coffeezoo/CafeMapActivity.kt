@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.databinding.ActivityCafeMapBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.InfoWindow
@@ -51,7 +53,6 @@ class CafeMapActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_cafe_map)
 
-//        mCafeData = intent.getSerializableExtra("mapView") as CafeData
         mCafeData = intent.getSerializableExtra("mapView") as CafeData
 
 
@@ -62,6 +63,10 @@ class CafeMapActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        val toast = Toast.makeText(this,"지도에 출발지를 선택해 주세요", Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.TOP,0,300)//메시지 위치 지정 Gravity 상수, x좌표, y좌표
+        toast.show()
 
     }
 
@@ -135,8 +140,8 @@ class CafeMapActivity : BaseActivity() {
 
 //        출발지
 
-        val cameraUpdate2 =  CameraUpdate.scrollTo( mSelectedStartPoint!! )
-        naverMap.moveCamera( cameraUpdate2 )
+        val cameraUpdate =  CameraUpdate.scrollTo( mSelectedStartPoint!! )
+        naverMap.moveCamera( cameraUpdate )
 
 //        선택지 마커 없으면 생성
 
@@ -156,10 +161,17 @@ class CafeMapActivity : BaseActivity() {
         mStartMarker!!.width = 50
         mStartMarker!!.height = 80
 
+        //카메라 도착지로 다시 이동
+
+        val cafeLatLng = LatLng( mCafeData!!.latitude, mCafeData!!.longitude )
+
+        val cameraUpdate2 =  CameraUpdate.scrollTo( cafeLatLng!! ).animate(CameraAnimation.Linear) //카메라 이동 에니메이션 추가
+        naverMap.moveCamera( cameraUpdate2 )
+
 //        출발지 / 도착지가 모두 반영되는 구조 완성.
 //        길찾기 API 호출 => 결과 분석, 화면에 추가 반영. (선 긋기 / 정보 표시)
 
-        val odSay = ODsayService.init(mContext, "hvTDdqC5yX4rd5jJykB8m9mL78tTFR64I3ExPwteLxk")
+        val odSay = ODsayService.init(mContext, "RPNRuFYDZSJmndub/Q0Yb16SPfWFgyfezCdK/RrNX1Y")
         odSay.requestSearchPubTransPath(
             mSelectedStartPoint!!.longitude.toString(),
             mSelectedStartPoint!!.latitude.toString(),
@@ -259,7 +271,7 @@ class CafeMapActivity : BaseActivity() {
                     }
 
 //                    마지막으로 목적지 좌표 추가.
-                    pathCoordList.add( LatLng( mCafeData!!.latitude, mCafeData!!.longitude ) )
+                    pathCoordList.add( cafeLatLng )
 
 
 //                    모든 좌표가 추가되었으니, 지도에 나오도록
