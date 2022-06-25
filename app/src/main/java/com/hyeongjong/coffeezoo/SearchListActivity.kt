@@ -1,5 +1,6 @@
 package com.hyeongjong.coffeezoo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyeongjong.coffeezoo.adapters.SearchListAdapter
+import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.databinding.ActivitySearchListBinding
 import com.hyeongjong.coffeezoo.datas.SearchData
 import com.hyeongjong.coffeezoo.utils.ContextUtil
@@ -19,13 +21,6 @@ class SearchListActivity : BaseActivity() {
     var mSearchList = ArrayList<SearchData>()
     lateinit var mAdapter : SearchListAdapter
     var mCurrentTime = System.currentTimeMillis()//현재시간 가져오기
-
-//    val listener = object : OnSearchClickListener {
-//        override fun onSearchClickEvent(search: SearchData) {
-//            binding.btnSearchAllDelete.setOnClickListener {  }
-//
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +75,17 @@ class SearchListActivity : BaseActivity() {
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         binding.searchListRecyclerView.setLayoutManager(linearLayoutManager)
+
+        //                어답터에 클릭이벤트 처리
+        mAdapter.oic = object : OnItemClick {
+            override fun onItemClick(position: Int) {
+//                쉐어드에 해당 position 데이터 삭제
+
+                ContextUtil.deleteSearchHistory(mContext, mSearchList, position )
+
+            }
+
+        }
 
     }
 

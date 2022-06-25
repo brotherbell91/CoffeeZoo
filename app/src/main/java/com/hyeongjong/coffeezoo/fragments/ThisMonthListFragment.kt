@@ -43,7 +43,9 @@ class ThisMonthListFragment : BaseFragment() {
 
 //        임시 데이터 연결
         mCafeStoreList = CafeData.thisMonthList()
+//        어답터에 데이터 연결
         mAdapter = ThisMonthListAdapter(mContext, mCafeStoreList)
+//        어답터에 클릭이벤트 처리
         mAdapter.oic = object : OnItemClick{
             override fun onItemClick(position: Int) {
 
@@ -63,6 +65,7 @@ class ThisMonthListFragment : BaseFragment() {
 
 //      리싸이클러뷰 연결
         binding.thisMonthRecyclerView.adapter = mAdapter
+//      리싸이클러뷰 모양설정
         binding.thisMonthRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }

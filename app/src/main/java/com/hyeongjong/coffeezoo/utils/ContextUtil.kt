@@ -1,9 +1,6 @@
 package com.hyeongjong.coffeezoo.utils
 
 import android.content.Context
-import android.preference.PreferenceManager
-import android.provider.ContactsContract
-import android.service.autofill.UserData
 import com.hyeongjong.coffeezoo.datas.SearchData
 import org.json.JSONArray
 import org.json.JSONException
@@ -23,7 +20,6 @@ class ContextUtil {
 //            해당 항목에 저장 기능 / 조회 기능
 
 //        setter
-
         fun setSearchHistory( context : Context, searchHistory : ArrayList<SearchData> ){
 
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
@@ -46,7 +42,7 @@ class ContextUtil {
         }
 
 //        getter
-        fun getSearchHistory( context : Context) : ArrayList<SearchData> {
+        fun getSearchHistory( context : Context ) : ArrayList<SearchData> {
 
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
@@ -70,6 +66,33 @@ class ContextUtil {
             }
             return searchHistory
         }
+
+//        delete
+        fun deleteSearchHistory( context : Context, searchHistory: ArrayList<SearchData>, position : Int ) : ArrayList<SearchData> {
+
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+            val jSonArray = JSONArray()
+
+            for ( i in 0 until searchHistory.size ){
+                if( i != position ) {
+                    val jSonObj = JSONObject()
+                    jSonObj.put("search",searchHistory[i].search)
+                    jSonObj.put("date",searchHistory[i].date)
+                    jSonArray.put(jSonObj)
+                }
+
+            }
+            if (!searchHistory.isEmpty()) {
+                pref.edit().putString(SEARCH_HISTORY,jSonArray.toString()).apply()
+            }
+            else{
+                pref.edit().putString(SEARCH_HISTORY,null).apply()
+            }
+            return searchHistory
+        }
+
+//        all delete
 
     }
 

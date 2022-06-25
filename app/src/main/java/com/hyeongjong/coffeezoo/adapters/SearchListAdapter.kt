@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hyeongjong.coffeezoo.R
+import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.datas.SearchData
 
 
@@ -15,14 +17,23 @@ data class SearchListAdapter(
     val mList : List<SearchData>,
 ) : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    var oic : OnItemClick? = null
+
+    inner class MyViewHolder(val view : View) : RecyclerView.ViewHolder(view){
         val txtSearchText = view.findViewById<TextView>(R.id.txtSearchText) //검색어
         val txtSearchDate = view.findViewById<TextView>(R.id.txtSearchDate) //검색날짜
+        val btnSearchDelete = view.findViewById<ImageView>(R.id.btnSearchDelete) //검색어삭제버튼
 
         fun bind(data : SearchData) {
 
             txtSearchText.text = data.search
             txtSearchDate.text = data.date
+
+            if (oic != null) {
+                btnSearchDelete.setOnClickListener {
+                    oic!!.onItemClick(position)
+                }
+            }
 
         }
 
