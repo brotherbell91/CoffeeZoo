@@ -105,6 +105,15 @@ class ContextUtil {
         }
 
 //        all delete
+        fun allDeleteSearchHistory( context : Context, searchHistory: ArrayList<SearchData> ) : ArrayList<SearchData> {
+
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+            searchHistory.clear()
+            pref.edit().putString(SEARCH_HISTORY,null).apply()
+
+            return searchHistory
+        }
 
     }
 

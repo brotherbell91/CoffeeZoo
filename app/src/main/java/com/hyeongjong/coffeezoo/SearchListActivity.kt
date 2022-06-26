@@ -35,13 +35,13 @@ class SearchListActivity : BaseActivity() {
     override fun setupEvents() {
 //      검색창에 포커스 넣기
         binding.EdtMainSearch.requestFocus()
-
+        
+//        에딧텍스트 엔터시 이벤트
         binding.EdtMainSearch.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-//                에딧텍스트 엔터시 이벤트
+//                검색 날짜 SearchHistory에 넣기
                 setSearchHistoryDate()
-
-                mAdapter.notifyDataSetChanged()
+                mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
 
             }
 //            setOnKeyListener에 backPressed 이벤트가 들어있어 백버튼을 다시 만들어줘야 한다
@@ -56,6 +56,7 @@ class SearchListActivity : BaseActivity() {
     }
 
     override fun setValues() {
+        binding.switchSearch.isChecked = true //임시, sharedPreference 연결 필요
 
     }
 
@@ -76,16 +77,34 @@ class SearchListActivity : BaseActivity() {
         linearLayoutManager.stackFromEnd = true
         binding.searchListRecyclerView.setLayoutManager(linearLayoutManager)
 
-        //                어답터에 클릭이벤트 처리
+//        어답터에 클릭이벤트 처리
         mAdapter.oic = object : OnItemClick {
             override fun onItemClick(position: Int) {
 //                쉐어드에 해당 position 데이터 삭제
                 mSearchList = ContextUtil.deleteSearchHistory(mContext, mSearchList, position )
-
-                mAdapter.notifyDataSetChanged()
+                mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
 
             }
 
+        }
+
+//        모두삭제 클릭리스너
+        binding.btnSearchAllDelete.setOnClickListener {
+//            쉐어드 프리퍼런스 값 가져오기
+            mSearchList = ContextUtil.allDeleteSearchHistory(mContext, mSearchList)
+            mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
+
+        }
+
+        binding.switchSearch.setOnCheckedChangeListener { compoundButton, isChecked ->
+
+//            스위치on
+            if (isChecked) {
+                Toast.makeText(mContext, "검색어 저장 활성화", Toast.LENGTH_SHORT).show()
+            }
+            else{ //스위치off
+                Toast.makeText(mContext, "검색어 저장 비활성화", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
