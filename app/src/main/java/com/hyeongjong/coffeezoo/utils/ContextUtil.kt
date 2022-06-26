@@ -74,6 +74,8 @@ class ContextUtil {
 
             val jSonArray = JSONArray()
 
+            val newSearchHistory = searchHistory
+
             for ( i in 0 until searchHistory.size ){
                 if( i != position ) {
                     val jSonObj = JSONObject()
@@ -83,13 +85,23 @@ class ContextUtil {
                 }
 
             }
+
+            newSearchHistory.clear()
+
+            for (i in 0 until jSonArray.length()){
+                val jSonObj = jSonArray.getJSONObject(i)
+                val search = jSonObj.getString("search")
+                val date = jSonObj.getString("date")
+                newSearchHistory.add(SearchData(search,date))
+            }
+
             if (!searchHistory.isEmpty()) {
                 pref.edit().putString(SEARCH_HISTORY,jSonArray.toString()).apply()
             }
             else{
                 pref.edit().putString(SEARCH_HISTORY,null).apply()
             }
-            return searchHistory
+            return newSearchHistory
         }
 
 //        all delete

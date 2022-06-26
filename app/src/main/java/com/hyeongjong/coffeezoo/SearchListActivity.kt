@@ -80,8 +80,9 @@ class SearchListActivity : BaseActivity() {
         mAdapter.oic = object : OnItemClick {
             override fun onItemClick(position: Int) {
 //                쉐어드에 해당 position 데이터 삭제
+                mSearchList = ContextUtil.deleteSearchHistory(mContext, mSearchList, position )
 
-                ContextUtil.deleteSearchHistory(mContext, mSearchList, position )
+                mAdapter.notifyDataSetChanged()
 
             }
 
