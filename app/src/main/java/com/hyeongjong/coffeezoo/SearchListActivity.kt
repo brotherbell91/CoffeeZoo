@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyeongjong.coffeezoo.adapters.SearchListAdapter
@@ -100,9 +103,11 @@ class SearchListActivity : BaseActivity() {
 
 //            스위치on
             if (isChecked) {
+                binding.searchListRecyclerView.isVisible = true
                 Toast.makeText(mContext, "검색어 저장 활성화", Toast.LENGTH_SHORT).show()
             }
             else{ //스위치off
+                binding.searchListRecyclerView.isInvisible = true
                 Toast.makeText(mContext, "검색어 저장 비활성화", Toast.LENGTH_SHORT).show()
             }
         }
