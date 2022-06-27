@@ -86,6 +86,7 @@ class SearchListActivity : BaseActivity() {
 //                쉐어드에 해당 position 데이터 삭제
                 mSearchList = ContextUtil.deleteSearchHistory(mContext, mSearchList, position )
                 mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
+                Toast.makeText(mContext, "삭제되었습니다", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -96,7 +97,7 @@ class SearchListActivity : BaseActivity() {
 //            쉐어드 프리퍼런스 값 가져오기
             mSearchList = ContextUtil.allDeleteSearchHistory(mContext, mSearchList)
             mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
-
+            Toast.makeText(mContext, "전체삭제 되었습니다", Toast.LENGTH_SHORT).show()
         }
 
         binding.switchSearch.setOnCheckedChangeListener { compoundButton, isChecked ->
