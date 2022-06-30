@@ -63,8 +63,10 @@ class SearchListActivity : BaseActivity() {
     }
 
     override fun setValues() {
-        binding.switchSearch.isChecked = true //임시, sharedPreference 연결 필요
-
+        binding.switchSearch.isChecked = ContextUtil.getSwitchSearch(mContext)
+        when(binding.switchSearch.isChecked) {
+            false->binding.searchListRecyclerView.isInvisible = true
+        }
     }
 
     fun getSearchHistory() {
@@ -105,8 +107,8 @@ class SearchListActivity : BaseActivity() {
         }
 
         binding.switchSearch.setOnCheckedChangeListener { compoundButton, isChecked ->
-
-//            스위치on
+            ContextUtil.setSwitchSearch(mContext, isChecked)
+            //            스위치on
             if (isChecked) {
                 binding.searchListRecyclerView.isVisible = true
                 Toast.makeText(mContext, "검색어 저장 활성화", Toast.LENGTH_SHORT).show()

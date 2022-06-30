@@ -16,6 +16,7 @@ class ContextUtil {
 
 //            저장할 항목의 이름. (조회할때도 같은 이름 사용)
         private val SEARCH_HISTORY = "SEARCH_HISTORY"
+        private val SWITCH_SEARCH = "SWITCH_SEARCH"
 
 //            해당 항목에 저장 기능 / 조회 기능
 
@@ -113,6 +114,24 @@ class ContextUtil {
             pref.edit().putString(SEARCH_HISTORY,null).apply()
 
             return searchHistory
+        }
+
+        fun setSwitchSearch( context : Context, isSwitchSearch : Boolean ){
+//            검색어 스위치가 On인지 Off인지?
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+            pref.edit().putBoolean(SWITCH_SEARCH, isSwitchSearch).apply()
+
+        }
+
+        fun getSwitchSearch( context: Context ) : Boolean {
+
+//            메모장을 열고, 저장된 변수를 리턴하자.
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+//            저장된 Switch On/Off 데이터가 없다면 내보내줄 기본값도 설정해야함.
+            return pref.getBoolean(SWITCH_SEARCH, false )
+
         }
 
     }
