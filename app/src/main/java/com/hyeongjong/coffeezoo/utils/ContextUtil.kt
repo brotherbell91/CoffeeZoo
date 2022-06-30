@@ -12,7 +12,7 @@ class ContextUtil {
     companion object{
 
 //            일종의 메모장 파일 이름. -> 다른 클래스가 볼 필요x
-        private val prefName = "SearchPref"
+        private val prefName = "CoffeeZooPref"
 
 //            저장할 항목의 이름. (조회할때도 같은 이름 사용)
         private val SEARCH_HISTORY = "SEARCH_HISTORY"
