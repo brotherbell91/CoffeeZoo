@@ -43,8 +43,12 @@ class SearchListActivity : BaseActivity() {
         binding.EdtMainSearch.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 //                검색 날짜 SearchHistory에 넣기
-                setSearchHistoryDate()
-                mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
+                if(binding.switchSearch.isChecked) {
+
+                    setSearchHistoryDate()
+                    mAdapter.notifyDataSetChanged() //리싸이클러뷰 리셋
+
+                }
 
             }
 //            setOnKeyListener에 backPressed 이벤트가 들어있어 백버튼을 다시 만들어줘야 한다
