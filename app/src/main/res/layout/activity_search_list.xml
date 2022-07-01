@@ -9,18 +9,34 @@
         android:orientation="vertical"
         tools:context=".SearchListActivity">
 
-        <EditText
-            android:id="@+id/EdtMainSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/search_icon_resize"
-            android:drawablePadding="15dp"
-            android:backgroundTint="@color/main"
-            android:drawableTint="@color/main"
-            android:hint="어디로 커캉스 갈까?"
-            android:textColorHighlight="@color/main"
-            android:textCursorDrawable="@color/main"
-            android:singleLine="true"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back_arrow" />
+
+            <EditText
+                android:id="@+id/EdtMainSearch"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/search_icon_resize"
+                android:drawablePadding="15dp"
+                android:backgroundTint="@color/main"
+                android:drawableTint="@color/main"
+                android:hint="어디로 커캉스 갈까?"
+                android:textColorHighlight="@color/main"
+                android:textCursorDrawable="@color/main"
+                android:singleLine="true"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

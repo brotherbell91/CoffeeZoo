@@ -27,7 +27,6 @@ data class ThisMonthListAdapter(
         val cafeAddress = view.findViewById<TextView>(R.id.txtItemCafeAddress) //카페주소
         val cafeDescription = view.findViewById<TextView>(R.id.txtItemCafeDescription) //카페설명
         val ratingBarCafeScore = view.findViewById<BaseRatingBar>(R.id.ratingBarCafeScore) //카페별점
-        val cafeSave = view.findViewById<ImageView>(R.id.save) //카페저장
 
         fun bind(data : CafeData){
 

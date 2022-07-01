@@ -1,6 +1,7 @@
 package com.hyeongjong.coffeezoo.utils
 
 import android.content.Context
+import com.hyeongjong.coffeezoo.datas.CafeData
 import com.hyeongjong.coffeezoo.datas.SearchData
 import org.json.JSONArray
 import org.json.JSONException
@@ -17,6 +18,7 @@ class ContextUtil {
 //            저장할 항목의 이름. (조회할때도 같은 이름 사용)
         private val SEARCH_HISTORY = "SEARCH_HISTORY"
         private val SWITCH_SEARCH = "SWITCH_SEARCH"
+        private val SAVE = "SAVE"
 
 //            해당 항목에 저장 기능 / 조회 기능
 
