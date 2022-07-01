@@ -29,6 +29,10 @@ class CafeDetailViewActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        //        백버튼 누르면 화면 종료
+        binding.imgBack.setOnClickListener {
+            finish()
+        }
 
         binding.txtDetailCafeNumber.setOnClickListener {
 
