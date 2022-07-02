@@ -63,6 +63,10 @@ class CafeMapActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        //        백버튼 누르면 화면 종료
+        binding.imgBack.setOnClickListener {
+            finish()
+        }
 
         val toast = Toast.makeText(this,"지도에 출발지를 선택해 주세요", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.TOP,0,300)//메시지 위치 지정 Gravity 상수, x좌표, y좌표
