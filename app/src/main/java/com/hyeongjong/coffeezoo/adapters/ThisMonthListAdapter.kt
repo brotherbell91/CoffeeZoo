@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.app.OnItemLongClick
@@ -27,6 +28,7 @@ data class ThisMonthListAdapter(
         val cafeAddress = view.findViewById<TextView>(R.id.txtItemCafeAddress) //카페주소
         val cafeDescription = view.findViewById<TextView>(R.id.txtItemCafeDescription) //카페설명
         val ratingBarCafeScore = view.findViewById<BaseRatingBar>(R.id.ratingBarCafeScore) //카페별점
+        val imgCafeLogo = view.findViewById<ImageView>(R.id.imgCafeLogo) //카페로고
 
         fun bind(data : CafeData){
 
@@ -34,6 +36,7 @@ data class ThisMonthListAdapter(
             cafeAddress.text = data.cafeAddress //카페주소
             cafeDescription.text = data.cafeDescription //카페설명
             ratingBarCafeScore.rating = data.score.toFloat() //카페별점
+            Glide.with(mContext).load(data.logoUrl).into(imgCafeLogo) //카페로고
 
             if (oic != null) {
                 view.setOnClickListener {

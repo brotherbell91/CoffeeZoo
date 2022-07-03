@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.hyeongjong.coffeezoo.databinding.ActivityCafeDetailViewBinding
@@ -90,6 +91,7 @@ class CafeDetailViewActivity : BaseActivity() {
         binding.txtDetailCafeNumber.text = mCafeData.cafeNumber
         binding.txtDetailCafeDescription.text = mCafeData.cafeDescription
         binding.ratingBarDetailCafeScore.rating = mCafeData.score.toFloat()
+        Glide.with(mContext).load(mCafeData.logoUrl).into(binding.imgCafe) //임시로 카페로고사용, 서버에서 가져올 카페사진 필요
 
     }
 }
