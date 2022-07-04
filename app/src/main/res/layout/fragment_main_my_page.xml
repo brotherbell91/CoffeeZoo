@@ -179,6 +179,7 @@
                 android:gravity="center_vertical">
 
                 <EditText
+                    android:id="@+id/edtPhoneNum1"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
@@ -188,6 +189,7 @@
                     android:hint="010" />
 
                 <EditText
+                    android:id="@+id/edtPhoneNum2"
                     android:layout_marginStart="2dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -198,6 +200,7 @@
                     android:background="@drawable/text_border" />
 
                 <EditText
+                    android:id="@+id/edtPhoneNum3"
                     android:layout_marginStart="2dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -208,6 +211,7 @@
                     android:background="@drawable/text_border" />
 
                 <TextView
+                    android:id="@+id/btnPhoneNumSave"
                     android:layout_marginStart="2dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
