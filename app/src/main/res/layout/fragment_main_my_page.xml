@@ -186,7 +186,8 @@
                     android:textSize="14sp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
-                    android:hint="010" />
+                    android:hint="010"
+                    android:inputType="phone"/>
 
                 <EditText
                     android:id="@+id/edtPhoneNum2"
@@ -197,7 +198,8 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     android:hint="xxxx"
-                    android:background="@drawable/text_border" />
+                    android:background="@drawable/text_border"
+                    android:inputType="phone"/>
 
                 <EditText
                     android:id="@+id/edtPhoneNum3"
@@ -208,7 +210,8 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     android:hint="xxxx"
-                    android:background="@drawable/text_border" />
+                    android:background="@drawable/text_border"
+                    android:inputType="phone"/>
 
                 <TextView
                     android:id="@+id/btnPhoneNumSave"

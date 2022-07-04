@@ -24,7 +24,6 @@ class PhotoListData(
             popularPhotoList.add(PhotoListData("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMjRfMTkw%2FMDAxNjE2NTYwNDc4NzQ2.glXhUL3NCXaLgegeZqrCUJ-9gBtWfg7XIRkeUwj9ZV4g.SUtNbCu6hOPouYwvHQcBstTTLSRTKMOlqbEE0RMzrPkg.JPEG.lila8333%2F09E079FB-CA5D-4340-BD78-BEDA98FE93E1.jpg", "야자수와 도넛이 잘 어우러진 카페"))
             popularPhotoList.add(PhotoListData("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEwMTNfMTU2%2FMDAxNjM0MTA0NTI2NTk2.lcalnCPrw51oa0knW4b6kL4l1j_a7UmHjsNsrW6_0zYg.wNwpv0jCC16yI4wxD-kdZsjM8ojudwnDkDBYg-Ve3q0g.JPEG.tjsghk1753%2FIMG_2646.JPG", "핑크색 곰돌이 너무 귀엽지 않나요?"))
             popularPhotoList.add(PhotoListData("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjA3MDNfMTMy%2FMDAxNjU2ODE4MDEyOTMw.R9UljQEihHNnzLCkHsV5HY43PyoL_LAdrJoK4gbfWTAg.eJNV9m_vD8kAl1n5_IaoDutGFOGnWOSzFMnkZb9JLcMg.JPEG%2Fupload_a03daf42bc555db35fbe34f929a2e1f8.jpg", "칵테일과 커피가 공존하던 그곳"))
-            popularPhotoList.add(PhotoListData("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210718_96%2F1626614369967tDTBy_JPEG%2FAXKQj5IxiiKqABXo-Vgtelz8.jpg", "바다뷰가 너무 아름다웠어요 항상 생각나네요"))
 
     return popularPhotoList
 
