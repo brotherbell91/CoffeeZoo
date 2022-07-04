@@ -21,7 +21,7 @@ class MainHomeFragmentViewPagerAdapter(fm : FragmentManager) : FragmentPagerAdap
     override fun getPageTitle(position: Int): CharSequence? {
         return when(position){
             0 -> "이달의 카페"
-            else -> "테마"
+            else -> "인기 리뷰"
         }
 
     }

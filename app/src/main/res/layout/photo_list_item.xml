@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imgPhotoListPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/coffeezoo_logo"
+            android:background="@drawable/image_view_round_corner"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/txtPhotoListComment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="내용"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</layout>
