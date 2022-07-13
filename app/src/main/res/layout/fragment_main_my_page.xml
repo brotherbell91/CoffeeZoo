@@ -187,7 +187,7 @@
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:hint="010"
-                    android:inputType="phone"/>
+                    android:inputType="phone" />
 
                 <EditText
                     android:id="@+id/edtPhoneNum2"
