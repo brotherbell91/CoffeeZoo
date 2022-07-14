@@ -1,13 +1,16 @@
 package com.hyeongjong.coffeezoo.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.FragmentMainMyPageBinding
+import com.kakao.sdk.user.UserApiClient
 
 class MainMyPageFragment : BaseFragment() {
 
@@ -59,6 +62,31 @@ class MainMyPageFragment : BaseFragment() {
     }
 
     override fun setValues() {
+
+//        사용자 정보 요청 (기본)
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("사용자 정보", "사용자 정보 요청 실패", error)
+            }
+            else if (user != null) {
+
+                val userId = user.id
+                val userEmail = user.kakaoAccount?.email
+                val userNick = user.kakaoAccount?.profile?.nickname
+                val userProfile = user.kakaoAccount?.profile?.thumbnailImageUrl
+
+                Log.i("사용자 정보", "사용자 정보 요청 성공" +
+                        "\n회원번호: ${userId}" +
+                        "\n이메일: ${userEmail}" +
+                        "\n닉네임: ${userNick}" +
+                        "\n프로필사진: ${userProfile}")
+
+                binding.txtNickname.text = userNick
+                binding.txtEmail.text = userEmail
+                Glide.with(mContext).load(userProfile).into(binding.imgProfile) //카페로고
+
+            }
+        }
 
 
 

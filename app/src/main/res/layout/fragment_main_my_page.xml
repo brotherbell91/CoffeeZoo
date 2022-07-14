@@ -23,8 +23,8 @@
                 android:src="@drawable/profile_icon" />
 
             <TextView
-                android:layout_marginTop="5dp"
                 android:id="@+id/txtNickname"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="닉네임" />
@@ -54,6 +54,7 @@
                 android:layout_marginEnd="20dp"/>
 
             <TextView
+                android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="coffeezoo@google.com"/>
