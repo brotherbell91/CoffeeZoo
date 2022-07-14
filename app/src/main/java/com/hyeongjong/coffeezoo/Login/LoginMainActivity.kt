@@ -2,12 +2,14 @@ package com.hyeongjong.coffeezoo.Login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
+import com.kakao.sdk.user.UserApiClient
 
 class LoginMainActivity : BaseActivity() {
 
@@ -25,10 +27,32 @@ class LoginMainActivity : BaseActivity() {
     override fun setupEvents() {
 
 //        카카오 로고 클릭시 > 카카오 로그인
-
         binding.imgKakao.setOnClickListener {
 
+//            카톡 앱이 깔려있으면? 앱으로 로그인, 아니면? 별도로 로그인
+            if(UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)){
 
+                Log.d("카톡로그인", "앱으로 로그인 가능")
+
+                UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
+
+//                    카톡 앱으로 로그인 되었을 때 할 코드
+
+                }
+
+            }
+            else{
+//                카톡 앱이 없어 카카오 계정으로 로그인
+                Log.d("카톡로그인", "앱으로 로그인 불가 - 별도 로그인 필요")
+
+                UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
+
+//                    카톡 앱이 없어서, 다른 방식으로 로그인 되었을 때 할 코드
+
+
+                }
+
+            }
 
         }
 
