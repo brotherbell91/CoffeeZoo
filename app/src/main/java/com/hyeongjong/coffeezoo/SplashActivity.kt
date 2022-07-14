@@ -1,12 +1,16 @@
 package com.hyeongjong.coffeezoo
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.hyeongjong.coffeezoo.Login.LoginMainActivity
 import com.hyeongjong.coffeezoo.databinding.ActivitySplashBinding
+import java.security.MessageDigest
 
 class SplashActivity : BaseActivity() {
 
@@ -35,6 +39,23 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        getKeyHash()
+
+    }
+
+//    키 해쉬값 추출
+    fun getKeyHash() {
+
+        val info = packageManager.getPackageInfo(
+            "com.hyeongjong.coffeezoo",
+            PackageManager.GET_SIGNATURES
+        )
+        for (signature in info.signatures) {
+            val md: MessageDigest = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+        }
 
     }
 }
