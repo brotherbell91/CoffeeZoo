@@ -24,7 +24,15 @@ class LoginMainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-        //        로그인 버튼 구현
+//        카카오 로고 클릭시 > 카카오 로그인
+
+        binding.imgKakao.setOnClickListener {
+
+
+
+        }
+
+//        로그인 버튼 구현
         binding.btnLogin.setOnClickListener {
             var inputId = binding.edtInputId.text.toString()
             var inputPw = binding.edtInputPw.text.toString()
