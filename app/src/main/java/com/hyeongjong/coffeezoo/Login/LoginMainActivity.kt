@@ -33,22 +33,23 @@ class LoginMainActivity : BaseActivity() {
             if(UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)){
 
                 Log.d("카톡로그인", "앱으로 로그인 가능")
-
+//                카카오톡으로 로그인
                 UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
 
 //                    카톡 앱으로 로그인 되었을 때 할 코드
+                    getUserInfo()
 
                 }
 
             }
             else{
-//                카톡 앱이 없어 카카오 계정으로 로그인
-                Log.d("카톡로그인", "앱으로 로그인 불가 - 별도 로그인 필요")
 
+                Log.d("카톡로그인", "앱으로 로그인 불가 - 별도 로그인 필요")
+//                카카오 계정으로 로그인
                 UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
 
 //                    카톡 앱이 없어서, 다른 방식으로 로그인 되었을 때 할 코드
-
+                    getUserInfo()
 
                 }
 
@@ -61,14 +62,12 @@ class LoginMainActivity : BaseActivity() {
             var inputId = binding.edtInputId.text.toString()
             var inputPw = binding.edtInputPw.text.toString()
 
-            val myIntent = Intent(this,MainActivity::class.java)
-
 //            맞다면
             if (inputId == "admin" && inputPw == "qwer") {
 
                 Toast.makeText(this, "관리자님 환영합니다.", Toast.LENGTH_SHORT).show()
 
-                startActivity(myIntent)
+                getUserInfo()
 
             }
 //            아이디가 틀리다면
@@ -87,6 +86,13 @@ class LoginMainActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+    }
+
+    fun getUserInfo (){
+
+        val myIntent = Intent(this,MainActivity::class.java)
+        startActivity(myIntent)
 
     }
 }
