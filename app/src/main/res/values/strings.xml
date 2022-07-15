@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CoffeeZoo</string>
+
+    <string name="facebook_app_id">1332506417278441</string>
+    <string name="fb_login_protocol_scheme">fb1332506417278441</string>
+    <string name="facebook_client_token">2d8ff46cc8f0d9d27bec08445b5f98aa</string>
+
 </resources>

@@ -64,6 +64,8 @@ dependencies {
 
     implementation "com.kakao.sdk:v2-user:2.11.0" // 카카오 로그인
 
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)' //페북 로그인
+
 
 
 }
