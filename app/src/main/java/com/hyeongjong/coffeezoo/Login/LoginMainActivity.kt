@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.facebook.CallbackManager
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
@@ -14,6 +15,8 @@ import com.kakao.sdk.user.UserApiClient
 class LoginMainActivity : BaseActivity() {
 
     lateinit var binding : ActivityLoginMainBinding
+
+    lateinit var mCallbackManager : CallbackManager //페북 로그인 화면에 다녀오면, 할 일을 관리해주는 변수.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,14 @@ class LoginMainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        페북 로고가 클릭시 > 페이스북 로그인
+        binding.imgFacebook.setOnClickListener {
+
+//            페북로그인 기능에 관련된 코드 준비가 필요함. (준비 먼저 하고
+
+        }
+
 
 //        카카오 로고 클릭시 > 카카오 로그인
         binding.imgKakao.setOnClickListener {
@@ -87,6 +98,14 @@ class LoginMainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        mCallbackManager = CallbackManager.Factory.create() // 페북로그인 - 콜백 관리 기능 초기화.
+
+    }
+
+//    페북로그인 화면에 다녀오면, 콜백매니저가 처리하도록.
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        mCallbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun getUserInfo (){
