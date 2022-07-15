@@ -81,9 +81,9 @@ class MainMyPageFragment : BaseFragment() {
                         "\n닉네임: ${userNick}" +
                         "\n프로필사진: ${userProfile}")
 
-                binding.txtNickname.text = userNick
-                binding.txtEmail.text = userEmail
-                Glide.with(mContext).load(userProfile).into(binding.imgProfile) //카페로고
+                binding.txtNickname.text = userNick //카카오 닉네임
+                binding.txtEmail.text = userEmail //카카오 이메일
+                Glide.with(mContext).load(userProfile).into(binding.imgProfile) //카카오 프로필 이미지
 
             }
         }

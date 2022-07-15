@@ -121,6 +121,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="소셜 로그인"/>
 
             <LinearLayout
@@ -133,10 +134,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:layout_margin="10dp">
+                    android:gravity="center_horizontal" >
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginHorizontal="15dp"
                         android:id="@+id/imgKakao"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -156,10 +157,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:layout_margin="10dp">
+                    android:gravity="center_horizontal" >
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginHorizontal="15dp"
                         android:id="@+id/imgNaver"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -179,10 +180,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:layout_margin="10dp">
+                    android:gravity="center_horizontal" >
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginHorizontal="15dp"
                         android:id="@+id/imgFacebook"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -192,7 +193,7 @@
                         android:layout_margin="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="구글"
+                        android:text="페이스북"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
