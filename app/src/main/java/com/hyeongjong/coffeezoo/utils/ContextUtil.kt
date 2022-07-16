@@ -18,7 +18,10 @@ class ContextUtil {
 //            저장할 항목의 이름. (조회할때도 같은 이름 사용)
         private val SEARCH_HISTORY = "SEARCH_HISTORY"
         private val SWITCH_SEARCH = "SWITCH_SEARCH"
-        private val SAVE = "SAVE"
+        private val FACEBOOK_ID = "FACEBOOK_ID"
+        private val FACEBOOK_NAME = "FACEBOOK_NAME"
+
+
 
 //            해당 항목에 저장 기능 / 조회 기능
 

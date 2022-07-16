@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.FragmentMainMyPageBinding
+import com.hyeongjong.coffeezoo.utils.ContextUtil
 import com.kakao.sdk.user.UserApiClient
 
 class MainMyPageFragment : BaseFragment() {
@@ -70,7 +71,7 @@ class MainMyPageFragment : BaseFragment() {
             }
             else if (user != null) {
 
-                val userId = user.id
+                val userId = user.id //회원정보에 사용처는 아직없음
                 val userEmail = user.kakaoAccount?.email
                 val userNick = user.kakaoAccount?.profile?.nickname
                 val userProfile = user.kakaoAccount?.profile?.thumbnailImageUrl
@@ -87,9 +88,6 @@ class MainMyPageFragment : BaseFragment() {
 
             }
         }
-
-
-
 
     }
 }

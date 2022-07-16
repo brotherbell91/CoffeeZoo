@@ -3,14 +3,23 @@ package com.hyeongjong.coffeezoo.Login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.facebook.CallbackManager
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
+import com.hyeongjong.coffeezoo.utils.ContextUtil
 import com.kakao.sdk.user.UserApiClient
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class LoginMainActivity : BaseActivity() {
 
@@ -32,7 +41,54 @@ class LoginMainActivity : BaseActivity() {
 //        페북 로고가 클릭시 > 페이스북 로그인
         binding.imgFacebook.setOnClickListener {
 
-//            페북로그인 기능에 관련된 코드 준비가 필요함. (준비 먼저 하고
+//            페북로그인 기능에 관련된 코드 준비가 필요함. (준비 먼저 하고 로그인 실행 : mCallbackManager 세팅)
+//            1. 로그인 화면에 다녀오면 어떤 행동을 할지? 할 일 설정.
+            LoginManager.getInstance().registerCallback(mCallbackManager, object :
+                FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult?) {
+
+//                    페북 로그인 성공 > 페북 서버의 액세스 토큰값 내려줌.
+
+//                    받은 토큰으로, 내정보도 받기 => GraphRequest 클래스 활용
+
+//                    1. 내 정보를 받아서 할일을 계획
+
+                    val graphRequest = GraphRequest.newMeRequest(result!!.accessToken, object : GraphRequest.GraphJSONObjectCallback{
+                        override fun onCompleted(jsonObj: JSONObject?, response: GraphResponse?) {
+
+                            Log.d("페북로그인-내정보", jsonObj!!.toString())
+
+//                            받은 정보에서 id값, 이름 추출(서버에 저장해야 활용 가능)
+//                            val id = jsonObj.getString("id")
+//                            val name = jsonObj.getString("name")
+
+                            val myIntent = Intent(mContext, MainActivity::class.java)
+                            startActivity(myIntent)
+                            finish()
+
+                        }
+
+                    })
+
+//                    2. 실제 내 정보 받아오기 실행
+
+                    graphRequest.executeAsync()
+
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException?) {
+
+                }
+            })
+//            2. 실제 로그인 실행
+
+//            이 화면에서, 공개프로필/이메일 권한 (예시)
+            LoginManager.getInstance().logInWithReadPermissions(this,
+                Arrays.asList("public_profile", "email"))
 
         }
 
