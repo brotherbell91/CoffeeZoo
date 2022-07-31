@@ -16,11 +16,16 @@ import com.willy.ratingbar.BaseRatingBar
 
 data class ThisMonthListAdapter(
     val mContext : Context,
-    var mList : List<CafeData>,
 ) : RecyclerView.Adapter<ThisMonthListAdapter.MyViewHolder>() {
+
+    var mList = mutableListOf<CafeData>()
 
     var oic : OnItemClick? = null
     var oilc : OnItemLongClick? = null
+
+    fun setListData(data:MutableList<CafeData>){
+        mList = data
+    }
 
     inner class MyViewHolder(val view : View) : RecyclerView.ViewHolder(view){
 
