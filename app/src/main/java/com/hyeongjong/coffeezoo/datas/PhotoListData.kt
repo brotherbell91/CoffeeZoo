@@ -3,7 +3,7 @@ package com.hyeongjong.coffeezoo.datas
 import java.io.Serializable
 
 class PhotoListData(
-    val logoUrl : String,
+    val image : String,
     val comment : String,
 ) : Serializable {
 

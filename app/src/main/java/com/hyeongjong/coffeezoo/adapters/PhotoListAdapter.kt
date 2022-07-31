@@ -23,7 +23,7 @@ data class PhotoListAdapter(
 
         fun bind(data : PhotoListData){
 
-            Glide.with(mContext).load(data.logoUrl).into(imgPhotoListPhoto) //카페사진
+            Glide.with(mContext).load(data.image).into(imgPhotoListPhoto) //카페사진
             txtPhotoListComment.text = data.comment //카페후기
             imgPhotoListPhoto.clipToOutline = true
 
