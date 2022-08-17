@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.adapters.PhotoListAdapter
 import com.hyeongjong.coffeezoo.databinding.FragmentPhotoListBinding
@@ -49,7 +48,7 @@ class PhotoListFragment : BaseFragment() {
 //      리싸이클러뷰 연결
         binding.photoListRecyclerView.adapter = mAdapter
 //      리싸이클러뷰 모양설정
-        binding.photoListRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        binding.photoListRecyclerView.layoutManager = GridLayoutManager(mContext, 2)
 
     }
 
