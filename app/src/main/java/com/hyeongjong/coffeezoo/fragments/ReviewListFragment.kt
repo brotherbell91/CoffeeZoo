@@ -7,24 +7,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hyeongjong.coffeezoo.R
-import com.hyeongjong.coffeezoo.adapters.PhotoListAdapter
-import com.hyeongjong.coffeezoo.databinding.FragmentPhotoListBinding
-import com.hyeongjong.coffeezoo.datas.PhotoListData
+import com.hyeongjong.coffeezoo.adapters.ReviewListAdapter
+import com.hyeongjong.coffeezoo.databinding.FragmentReviewListBinding
+import com.hyeongjong.coffeezoo.datas.ReviewListData
 
-class PhotoListFragment : BaseFragment() {
+class ReviewListFragment : BaseFragment() {
 
-    lateinit var binding : FragmentPhotoListBinding
+    lateinit var binding : FragmentReviewListBinding
 
-    var mPhotoList = ArrayList<PhotoListData>()
+    var mPhotoList = ArrayList<ReviewListData>()
 
-    lateinit var mAdapter : PhotoListAdapter
+    lateinit var mAdapter : ReviewListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo_list, container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_review_list, container,false)
         return binding.root
     }
 
@@ -42,9 +42,9 @@ class PhotoListFragment : BaseFragment() {
 
     override fun setValues() {
 //        임시 데이터 연결
-        mPhotoList = PhotoListData.photoList()
+        mPhotoList = ReviewListData.photoList()
 //        어답터에 데이터 연결
-        mAdapter = PhotoListAdapter(mContext, mPhotoList)
+        mAdapter = ReviewListAdapter(mContext, mPhotoList)
 //      리싸이클러뷰 연결
         binding.photoListRecyclerView.adapter = mAdapter
 //      리싸이클러뷰 모양설정
