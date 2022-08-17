@@ -14,7 +14,6 @@ import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.adapters.ThisMonthListAdapter
 import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.databinding.FragmentThisMonthListBinding
-import com.hyeongjong.coffeezoo.datas.CafeData
 import com.hyeongjong.coffeezoo.lifecycle.ListViewModel
 
 class ThisMonthListFragment : BaseFragment() {
@@ -76,7 +75,7 @@ class ThisMonthListFragment : BaseFragment() {
 
     fun observerData(){
 //        fragment 에서 this 대신 viewLifecycleOwner 를 사용
-        viewModel.fetchData().observe(viewLifecycleOwner, Observer {
+        viewModel.fetchCafeData().observe(viewLifecycleOwner, Observer {
             mAdapter.setListData(it)
             mAdapter.notifyDataSetChanged()
 

@@ -4,16 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hyeongjong.coffeezoo.datas.CafeData
+import com.hyeongjong.coffeezoo.datas.ReviewData
 
 class ListViewModel : ViewModel() {
 
     private val repo = Repo()
 
-    fun fetchData() : LiveData<MutableList<CafeData>> {
+    fun fetchCafeData() : LiveData<MutableList<CafeData>> {
 
         val mutableData = MutableLiveData<MutableList<CafeData>>()
 
-        repo.getData().observeForever {
+        repo.getCafeData().observeForever {
 
             mutableData.value = it
 
@@ -21,4 +22,20 @@ class ListViewModel : ViewModel() {
         return mutableData
 
     }
+
+    fun fetchReviewData() : LiveData<MutableList<ReviewData>> {
+
+        val mutableData = MutableLiveData<MutableList<ReviewData>>()
+
+        repo.getReviewData().observeForever {
+
+            mutableData.value = it
+
+        }
+        return mutableData
+
+    }
+
+
+
 }

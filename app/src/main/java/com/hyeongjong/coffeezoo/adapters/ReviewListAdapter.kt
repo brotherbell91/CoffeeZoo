@@ -9,19 +9,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
-import com.hyeongjong.coffeezoo.datas.ReviewListData
+import com.hyeongjong.coffeezoo.datas.CafeData
+import com.hyeongjong.coffeezoo.datas.ReviewData
 
 data class ReviewListAdapter(
     val mContext : Context,
-    var mList : List<ReviewListData>,
 ) : RecyclerView.Adapter<ReviewListAdapter.MyViewHolder>() {
+
+    var mList = mutableListOf<ReviewData>()
+
+    fun setListData(data:MutableList<ReviewData>){
+        mList = data
+    }
 
     inner class MyViewHolder(val view : View) : RecyclerView.ViewHolder(view){
 
         val imgPhotoListPhoto = view.findViewById<ImageView>(R.id.imgPhotoListPhoto) //카페사진
         val txtPhotoListComment = view.findViewById<TextView>(R.id.txtPhotoListComment) //카페후기
 
-        fun bind(data : ReviewListData){
+        fun bind(data : ReviewData){
 
             Glide.with(mContext).load(data.image).into(imgPhotoListPhoto) //카페사진
             txtPhotoListComment.text = data.comment //카페후기
