@@ -3,7 +3,6 @@ package com.hyeongjong.coffeezoo.Login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.facebook.*
@@ -13,12 +12,8 @@ import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
-import com.hyeongjong.coffeezoo.utils.ContextUtil
 import com.kakao.sdk.user.UserApiClient
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
 
 class LoginMainActivity : BaseActivity() {
