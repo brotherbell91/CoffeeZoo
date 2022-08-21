@@ -7,7 +7,97 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Login.SignUpActivity">
+        tools:context=".Login.SignUpActivity"
+        android:orientation="vertical"
+        android:padding="45dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/coffeezoo_logo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="40dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/edtInputNewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/main"
+                android:drawableStart="@drawable/id_icon_resize"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main"
+                android:hint="이메일"
+                android:inputType="textEmailAddress"
+                android:textColorHighlight="@color/main"
+                android:textCursorDrawable="@color/main"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtInputNewPw"
+                android:textSize="16sp"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/passworld_icon_resize"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main"
+                android:backgroundTint="@color/main"
+                android:textCursorDrawable="@color/main"
+                android:textColorHighlight="@color/main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edtInputNewPw2"
+                android:textSize="16sp"
+                android:hint="비밀번호 확인"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/passworld_icon_resize"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main"
+                android:backgroundTint="@color/main"
+                android:textCursorDrawable="@color/main"
+                android:textColorHighlight="@color/main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp" >
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="가입"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSignUpCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:background="#00ff0000" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
