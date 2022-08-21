@@ -33,6 +33,14 @@ class LoginMainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        회원가입 클릭 이벤트
+        binding.btnSignUp.setOnClickListener {
+
+            val myIntent = Intent(this,SignUpActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
 //        페북 로고가 클릭시 > 페이스북 로그인
         binding.imgFacebook.setOnClickListener {
 
