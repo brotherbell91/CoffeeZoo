@@ -73,6 +73,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
     def lifecycle_version = "2.5.0"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" // ViewModel
