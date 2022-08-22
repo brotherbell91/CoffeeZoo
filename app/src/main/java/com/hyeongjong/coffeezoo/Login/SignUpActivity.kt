@@ -37,6 +37,12 @@ class SignUpActivity : BaseActivity() {
 
         }
 
+        binding.btnSignUpCancel.setOnClickListener {
+
+            finish()
+
+        }
+
     }
 
     override fun setValues() {

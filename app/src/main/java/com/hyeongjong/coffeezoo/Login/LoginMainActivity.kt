@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
@@ -22,10 +24,13 @@ class LoginMainActivity : BaseActivity() {
 
     lateinit var mCallbackManager : CallbackManager //페북 로그인 화면에 다녀오면, 할 일을 관리해주는 변수.
 
+    var auth: FirebaseAuth? = null;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_main)
 
+        auth = FirebaseAuth.getInstance()
         setupEvents()
         setValues()
 
@@ -95,7 +100,6 @@ class LoginMainActivity : BaseActivity() {
 
         }
 
-
 //        카카오 로고 클릭시 > 카카오 로그인
         binding.imgKakao.setOnClickListener {
 
@@ -129,27 +133,8 @@ class LoginMainActivity : BaseActivity() {
 
 //        로그인 버튼 구현
         binding.btnLogin.setOnClickListener {
-            var inputId = binding.edtInputId.text.toString()
-            var inputPw = binding.edtInputPw.text.toString()
 
-//            맞다면
-            if (inputId == "admin" && inputPw == "qwer") {
-
-                Toast.makeText(this, "관리자님 환영합니다.", Toast.LENGTH_SHORT).show()
-
-                getUserInfo()
-
-            }
-//            아이디가 틀리다면
-            else if(inputId != "admin") {
-
-                Toast.makeText(this, "잘못된 아이디입니다.", Toast.LENGTH_SHORT).show()
-            }
-//            아이디는 맞고 비밀번호가 틀리다면
-            else {
-
-                Toast.makeText(this, "잘못된 비밀번호입니다.", Toast.LENGTH_SHORT).show()
-            }
+            signinEmail()
 
         }
 
@@ -167,12 +152,39 @@ class LoginMainActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun getUserInfo (){
+    fun getUserInfo() {
 
         val myIntent = Intent(this,MainActivity::class.java)
         startActivity(myIntent)
 
         Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
 
+    }
+
+//    이메일 로그인
+    fun signinEmail() {
+
+        var inputId = binding.edtInputId.text.toString()
+        var inputPw = binding.edtInputPw.text.toString()
+
+        auth?.signInWithEmailAndPassword(inputId,inputPw)
+            ?.addOnCompleteListener {
+                    task ->
+                if(task.isSuccessful) {
+                    // Login, 아이디와 패스워드가 맞았을 때
+                    moveMainPage(task.result?.user)
+                    Toast.makeText(this,inputId+"님 환영합니다", Toast.LENGTH_LONG).show()
+                } else {
+                    // Show the error message, 아이디와 패스워드가 틀렸을 때
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+//    파이어베이스 유저 확인 후 로그인
+    fun moveMainPage(user: FirebaseUser?) {
+        if(user != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }
