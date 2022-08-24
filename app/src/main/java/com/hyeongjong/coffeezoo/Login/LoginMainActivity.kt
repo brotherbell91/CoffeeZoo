@@ -15,6 +15,8 @@ import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.OAuthLoginCallback
 import org.json.JSONObject
 import java.util.*
 
@@ -134,7 +136,27 @@ class LoginMainActivity : BaseActivity() {
 //        네이버 로고 클릭시 > 네이버 로그인
         binding.imgNaver.setOnClickListener {
 
+            val oauthLoginCallback = object : OAuthLoginCallback {
+                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                override fun onSuccess() {
 
+                    val myIntent = Intent(mContext, MainActivity::class.java)
+                    startActivity(myIntent)
+                    finish()
+
+                }
+                override fun onFailure(httpStatus: Int, message: String) {
+                    val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+                    val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+                    Toast.makeText(mContext,"errorCode:$errorCode, errorDesc:$errorDescription",Toast.LENGTH_SHORT).show()
+                }
+                override fun onError(errorCode: Int, message: String) {
+                    onFailure(errorCode, message)
+                }
+            }
+
+            NaverIdLoginSDK.initialize(mContext, getString(R.string.naver_client_id), getString(R.string.naver_client_secret), "CoffeeZoo")
+            NaverIdLoginSDK.authenticate(mContext, oauthLoginCallback)
 
         }
 
