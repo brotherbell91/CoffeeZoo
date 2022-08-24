@@ -111,7 +111,7 @@ class LoginMainActivity : BaseActivity() {
                 UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
 
 //                    카톡 앱으로 로그인 되었을 때 할 코드
-                    getUserInfo()
+                    getKakaoUserInfo()
 
                 }
 
@@ -123,11 +123,18 @@ class LoginMainActivity : BaseActivity() {
                 UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
 
 //                    카톡 앱이 없어서, 다른 방식으로 로그인 되었을 때 할 코드
-                    getUserInfo()
+                    getKakaoUserInfo()
 
                 }
 
             }
+
+        }
+
+//        네이버 로고 클릭시 > 네이버 로그인
+        binding.imgNaver.setOnClickListener {
+
+
 
         }
 
@@ -152,7 +159,7 @@ class LoginMainActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun getUserInfo() {
+    fun getKakaoUserInfo() {
 
         val myIntent = Intent(this,MainActivity::class.java)
         startActivity(myIntent)
