@@ -1,5 +1,6 @@
 package com.hyeongjong.coffeezoo.Login
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,13 +11,18 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 import org.json.JSONObject
 import java.util.*
 
@@ -27,6 +33,14 @@ class LoginMainActivity : BaseActivity() {
     lateinit var mCallbackManager : CallbackManager //페북 로그인 화면에 다녀오면, 할 일을 관리해주는 변수.
 
     var auth: FirebaseAuth? = null;
+
+    private var email : String = ""
+    private var profileImage : String = ""
+    private var nick : String = ""
+    private var phoneNumber : String = ""
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,6 +154,29 @@ class LoginMainActivity : BaseActivity() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 override fun onSuccess() {
 
+                    // 네이버 로그인 API 호출 성공 시 유저 정보를 가져온다
+                    NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+                        override fun onSuccess(result: NidProfileResponse) {
+                            email = result.profile?.email.toString()
+                            profileImage = result.profile?.profileImage.toString()
+                            nick = result.profile?.nickname.toString()
+                            phoneNumber = result.profile?.mobile.toString()
+
+                            Log.e(TAG, "네이버 로그인한 유저 정보 - 이메일 : $email")
+                            Log.e(TAG, "네이버 로그인한 유저 정보 - 프로필이미지 : $profileImage")
+                            Log.e(TAG, "네이버 로그인한 유저 정보 - 닉네임 : $nick")
+                            Log.e(TAG, "네이버 로그인한 유저 정보 - 휴대폰번호 : $phoneNumber")
+                        }
+
+                        override fun onError(errorCode: Int, message: String) {
+                            //
+                        }
+
+                        override fun onFailure(httpStatus: Int, message: String) {
+                            //
+                        }
+                    })
+
                     val myIntent = Intent(mContext, MainActivity::class.java)
                     startActivity(myIntent)
                     finish()
@@ -215,5 +252,13 @@ class LoginMainActivity : BaseActivity() {
         if(user != null) {
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    fun getNaverUserInfo() {
+
+//        val database = Firebase.database("https://coffeezoo-30c55-default-rtdb.asia-southeast1.firebasedatabase.app/")
+//        val myRef = database.getReference("")
+
+
     }
 }
