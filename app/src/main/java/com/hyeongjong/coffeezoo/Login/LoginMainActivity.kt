@@ -11,8 +11,6 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
@@ -38,9 +36,6 @@ class LoginMainActivity : BaseActivity() {
     private var profileImage : String = ""
     private var nick : String = ""
     private var phoneNumber : String = ""
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -219,6 +214,27 @@ class LoginMainActivity : BaseActivity() {
     }
 
     fun getKakaoUserInfo() {
+
+        //        사용자 정보 요청 (기본)
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("사용자 정보", "사용자 정보 요청 실패", error)
+            }
+            else if (user != null) {
+
+                val email = user.kakaoAccount?.email.toString()
+                val nick = user.kakaoAccount?.profile?.nickname.toString()
+                val profileImage = user.kakaoAccount?.profile?.thumbnailImageUrl.toString()
+                val phoneNumber = user.kakaoAccount?.phoneNumber.toString()
+
+                Log.i("사용자 정보", "사용자 정보 요청 성공" +
+                        "\n이메일: ${email}" +
+                        "\n닉네임: ${nick}" +
+                        "\n프로필사진: ${profileImage}" +
+                        "\n휴대폰번호: ${phoneNumber}")
+
+            }
+        }
 
         val myIntent = Intent(this,MainActivity::class.java)
         startActivity(myIntent)
