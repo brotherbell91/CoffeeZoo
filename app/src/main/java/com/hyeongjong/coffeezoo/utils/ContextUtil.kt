@@ -18,6 +18,7 @@ class ContextUtil {
 //            저장할 항목의 이름. (조회할때도 같은 이름 사용)
         private val SEARCH_HISTORY = "SEARCH_HISTORY"
         private val SWITCH_SEARCH = "SWITCH_SEARCH"
+        private val LOGIN_ID = "LOGIN_ID"
 
 //            해당 항목에 저장 기능 / 조회 기능
 
@@ -134,6 +135,25 @@ class ContextUtil {
             return pref.getBoolean(SWITCH_SEARCH, false )
 
         }
+
+        fun setLoginId( context : Context, isLoginId : String ){
+//            로그인 ID 저장
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+            pref.edit().putString(LOGIN_ID, isLoginId).apply()
+
+        }
+
+        fun getLoginId( context: Context ) : String? {
+
+//            메모장을 열고, 저장된 변수를 리턴하자.
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+//            저장된 ID 데이터가 없다면 내보내줄 기본값도 설정해야함.
+            return pref.getString(LOGIN_ID, null)
+
+        }
+
 
     }
 

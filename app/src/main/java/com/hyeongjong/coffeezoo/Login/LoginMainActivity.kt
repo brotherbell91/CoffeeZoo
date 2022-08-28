@@ -15,6 +15,7 @@ import com.hyeongjong.coffeezoo.BaseActivity
 import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
+import com.hyeongjong.coffeezoo.utils.ContextUtil
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
@@ -78,8 +79,11 @@ class LoginMainActivity : BaseActivity() {
                             Log.d("페북로그인-내정보", jsonObj!!.toString())
 
 //                            받은 정보에서 id값, 이름 추출(서버에 저장해야 활용 가능)
-//                            val id = jsonObj.getString("id")
-//                            val name = jsonObj.getString("name")
+                            email = jsonObj.getString("id")
+                            nick = jsonObj.getString("name")
+//                            profileImage
+//                            phoneNumber
+
 
                             val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
@@ -248,6 +252,7 @@ class LoginMainActivity : BaseActivity() {
 
         var inputId = binding.edtInputId.text.toString()
         var inputPw = binding.edtInputPw.text.toString()
+        ContextUtil.setLoginId(this, inputId)
 
         auth?.signInWithEmailAndPassword(inputId,inputPw)
             ?.addOnCompleteListener {

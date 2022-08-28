@@ -180,45 +180,20 @@
                 android:gravity="center_vertical">
 
                 <EditText
-                    android:id="@+id/edtPhoneNum1"
+                    android:id="@+id/edtPhoneNum"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
-                    android:hint="010"
+                    android:hint="010-0000-0000"
                     android:inputType="phone" />
-
-                <EditText
-                    android:id="@+id/edtPhoneNum2"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:hint="xxxx"
-                    android:background="@drawable/text_border"
-                    android:inputType="phone"/>
-
-                <EditText
-                    android:id="@+id/edtPhoneNum3"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:hint="xxxx"
-                    android:background="@drawable/text_border"
-                    android:inputType="phone"/>
 
                 <TextView
                     android:id="@+id/btnPhoneNumSave"
                     android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="90dp"
                     android:layout_height="30dp"
                     android:text="변경"
                     android:textSize="16sp"
@@ -279,6 +254,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchMail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -304,6 +280,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchSms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
