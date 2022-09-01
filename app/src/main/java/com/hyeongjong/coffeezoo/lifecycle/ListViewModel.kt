@@ -36,4 +36,17 @@ class ListViewModel : ViewModel() {
 
     }
 
+    fun fetchCommentData(cafeName : String) : LiveData<MutableList<ReviewData>> {
+
+        val mutableData = MutableLiveData<MutableList<ReviewData>>()
+
+        repo.getCommentData(cafeName).observeForever {
+
+            mutableData.value = it
+
+        }
+        return mutableData
+
+    }
+
 }

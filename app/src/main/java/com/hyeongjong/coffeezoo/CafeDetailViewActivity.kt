@@ -1,25 +1,22 @@
 package com.hyeongjong.coffeezoo
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import com.hyeongjong.coffeezoo.adapters.CafeDetailViewAdapter
+import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.databinding.ActivityCafeDetailViewBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
-import com.hyeongjong.coffeezoo.datas.ProfileData
-import com.hyeongjong.coffeezoo.datas.ReviewData
+import com.hyeongjong.coffeezoo.lifecycle.ListViewModel
 
 class CafeDetailViewActivity : BaseActivity() {
 
@@ -27,12 +24,17 @@ class CafeDetailViewActivity : BaseActivity() {
 
     lateinit var mCafeData : CafeData
 
+    lateinit var mAdapter : CafeDetailViewAdapter
+
+    private val viewModel by lazy { ViewModelProvider(this).get(ListViewModel::class.java) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_cafe_detail_view)
 
         setupEvents()
         setValues()
+        observerData()
 
     }
 
@@ -100,6 +102,37 @@ class CafeDetailViewActivity : BaseActivity() {
         binding.ratingBarDetailCafeScore.rating = mCafeData.score.toFloat()
         Glide.with(mContext).load(mCafeData.logoUrl).into(binding.imgCafe) //임시로 카페로고사용, 서버에서 가져올 카페사진 필요
 
+        //어답터 연결
+        mAdapter = CafeDetailViewAdapter(mContext)
+        //리싸이클러뷰 연결
+        binding.DetailCafeCommentRecyclerView.adapter = mAdapter
+        //리싸이클러뷰 모양설정
+        binding.DetailCafeCommentRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+
     }
 
+    fun observerData(){
+//        fragment 에서 this 대신 viewLifecycleOwner 를 사용
+        viewModel.fetchCommentData(mCafeData.cafeName).observe(this, Observer {
+            mAdapter.setListData(it)
+            mAdapter.notifyDataSetChanged()
+
+//            클릭이벤트
+//            mAdapter.oic = object : OnItemClick {
+//                override fun onItemClick(position: Int) {
+//
+//                    val clickCafeStore = it[position]
+//
+//                    val myIntent = Intent(mContext, CafeDetailViewActivity::class.java)
+//                    myIntent.putExtra("clickedCafeDetail", clickCafeStore)
+//                    startActivity(myIntent)
+//
+//                }
+//
+//            }
+
+        })
+
+    }
 }
