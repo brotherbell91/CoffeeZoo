@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.app.OnItemClick
-import com.hyeongjong.coffeezoo.app.OnItemLongClick
 import com.hyeongjong.coffeezoo.datas.ReviewData
 
 data class CafeDetailViewAdapter(
@@ -29,15 +29,27 @@ data class CafeDetailViewAdapter(
 
         val txtCafeDetailNick = view.findViewById<TextView>(R.id.txtCafeDetailNick) //닉네임
         val txtCafeDetailComment = view.findViewById<TextView>(R.id.txtCafeDetailComment) //댓글
-        val imgCafeDetailPhoto = view.findViewById<ImageView>(R.id.imgCafeDetailPhoto) //사진
+        val imgCafeDetailImage = view.findViewById<ImageView>(R.id.imgCafeDetailImage) //후기이미지
+        val imgCafeDetailCamera = view.findViewById<ImageView>(R.id.imgCafeDetailCamera) //카메라
+        val txtCafeDetailDate = view.findViewById<TextView>(R.id.txtCafeDetailDate) //날짜
 
         fun bind(data : ReviewData){
 
             txtCafeDetailNick.text = data.nick //닉네임
-            txtCafeDetailComment.text = data.comment
+            txtCafeDetailComment.text = data.comment //댓글
+            Glide.with(mContext).load(data.image).into(imgCafeDetailImage) //후기이미지
+            txtCafeDetailDate.text = data.date //날짜
+
+            imgCafeDetailImage.clipToOutline = true //이미지에 라운드 넣기
+
+            if (data.image == "image"){ //파이어베이스에 이미지가 없다면 카메라아이콘 제거와 이미지자리 없애기
+                imgCafeDetailCamera.isGone = true
+                imgCafeDetailImage.isGone = true
+            }
+
 
             if (oic != null) {
-                imgCafeDetailPhoto.setOnClickListener {
+                imgCafeDetailImage.setOnClickListener {
                     oic!!.onItemClick(position)
                 }
             }
