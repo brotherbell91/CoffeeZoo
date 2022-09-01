@@ -254,18 +254,20 @@ class LoginMainActivity : BaseActivity() {
         var inputPw = binding.edtInputPw.text.toString()
         ContextUtil.setLoginId(this, inputId)
 
-        auth?.signInWithEmailAndPassword(inputId,inputPw)
-            ?.addOnCompleteListener {
-                    task ->
-                if(task.isSuccessful) {
-                    // Login, 아이디와 패스워드가 맞았을 때
-                    moveMainPage(task.result?.user)
-                    Toast.makeText(this,inputId+"님 환영합니다", Toast.LENGTH_LONG).show()
-                } else {
-                    // Show the error message, 아이디와 패스워드가 틀렸을 때
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
-                }
+    auth?.signInWithEmailAndPassword(inputId,inputPw)
+        ?.addOnCompleteListener {
+                task ->
+            if(task.isSuccessful) {
+                // Login, 아이디와 패스워드가 맞았을 때
+                moveMainPage(task.result?.user)
+                Toast.makeText(this,inputId+"님 환영합니다", Toast.LENGTH_LONG).show()
             }
+            else {
+                // Show the error message, 아이디와 패스워드가 틀렸을 때
+                Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 
 //    파이어베이스 유저 확인 후 로그인

@@ -1,18 +1,25 @@
 package com.hyeongjong.coffeezoo
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.hyeongjong.coffeezoo.databinding.ActivityCafeDetailViewBinding
 import com.hyeongjong.coffeezoo.datas.CafeData
-
+import com.hyeongjong.coffeezoo.datas.ProfileData
+import com.hyeongjong.coffeezoo.datas.ReviewData
 
 class CafeDetailViewActivity : BaseActivity() {
 
@@ -94,4 +101,5 @@ class CafeDetailViewActivity : BaseActivity() {
         Glide.with(mContext).load(mCafeData.logoUrl).into(binding.imgCafe) //임시로 카페로고사용, 서버에서 가져올 카페사진 필요
 
     }
+
 }
