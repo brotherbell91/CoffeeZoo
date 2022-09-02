@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.app.OnItemClick
 import com.hyeongjong.coffeezoo.datas.ReviewData
+import com.willy.ratingbar.BaseRatingBar
 
 data class CafeDetailViewAdapter(
     val mContext : Context,
@@ -32,6 +33,8 @@ data class CafeDetailViewAdapter(
         val imgCafeDetailImage = view.findViewById<ImageView>(R.id.imgCafeDetailImage) //후기이미지
         val imgCafeDetailCamera = view.findViewById<ImageView>(R.id.imgCafeDetailCamera) //카메라
         val txtCafeDetailDate = view.findViewById<TextView>(R.id.txtCafeDetailDate) //날짜
+        val ratingBarCafeDetailScore = view.findViewById<BaseRatingBar>(R.id.ratingBarCafeDetailScore) //댓글별점
+
 
         fun bind(data : ReviewData){
 
@@ -39,6 +42,7 @@ data class CafeDetailViewAdapter(
             txtCafeDetailComment.text = data.comment //댓글
             Glide.with(mContext).load(data.image).into(imgCafeDetailImage) //후기이미지
             txtCafeDetailDate.text = data.date //날짜
+            ratingBarCafeDetailScore.rating = data.score.toFloat() //댓글별점
 
             imgCafeDetailImage.clipToOutline = true //이미지에 라운드 넣기
 

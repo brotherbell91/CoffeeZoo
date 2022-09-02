@@ -9,6 +9,7 @@ class ReviewData(
     val id : String = "apple@naver.com",
     val image : String = "image",
     val nick : String = "nick",
+    val score : Double = 1.0,
     val num : Double = 1.0,
 ) : Serializable {
 
