@@ -72,9 +72,13 @@ class Repo {
                     for ( userSnapshot in snapshot.children ){
 
                         val getData = userSnapshot.getValue(ReviewData::class.java)
-                        listData.add(getData!!)
+                        if (getData!!.image != "image") {
 
-                        mutableData.value = listData
+                            listData.add(getData!!)
+
+                            mutableData.value = listData
+
+                        }
 
                     }
 
