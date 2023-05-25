@@ -1,6 +1,7 @@
 package com.hyeongjong.coffeezoo.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +15,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.hyeongjong.coffeezoo.Login.LoginMainActivity
+import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.FragmentMainMyPageBinding
 import com.hyeongjong.coffeezoo.datas.ProfileData
 import com.hyeongjong.coffeezoo.utils.ContextUtil
+import com.kakao.sdk.user.UserApiClient
 
 class MainMyPageFragment : BaseFragment() {
 
@@ -55,6 +59,20 @@ class MainMyPageFragment : BaseFragment() {
 
             binding.edtPhoneNum.text.clear() //edtPhoneNum에 입력된 text 지우기
             binding.edtPhoneNum.clearFocus()
+
+        }
+
+        binding.btnLogout.setOnClickListener {
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    Toast.makeText(mContext, "로그아웃 실패", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(mContext, "로그아웃 성공", Toast.LENGTH_SHORT).show()
+
+                    val myIntent = Intent(mContext, LoginMainActivity::class.java)
+                    startActivity(myIntent)
+                }
+            }
 
         }
 

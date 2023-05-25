@@ -16,6 +16,9 @@ import com.hyeongjong.coffeezoo.MainActivity
 import com.hyeongjong.coffeezoo.R
 import com.hyeongjong.coffeezoo.databinding.ActivityLoginMainBinding
 import com.hyeongjong.coffeezoo.utils.ContextUtil
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
@@ -117,42 +120,71 @@ class LoginMainActivity : BaseActivity() {
 
 //        카카오 로고 클릭시 > 카카오 로그인
         binding.imgKakao.setOnClickListener {
-
 //            카톡 앱이 깔려있으면? 앱으로 로그인, 아니면? 별도로 로그인
             if(UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)){
-
-                Log.d("카톡로그인", "앱으로 로그인 가능")
-//                카카오톡으로 로그인
+                //카톡으로 로그인
                 UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
+                    if (error != null) {
+                        //뒤로가기시
+                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                            Toast.makeText(mContext, "카카오톡으로 로그인 실패", Toast.LENGTH_SHORT).show()
+                            return@loginWithKakaoTalk
+                        }
+                        UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
+                            if (error != null) {
+                                Toast.makeText(this, "카카오계정으로 로그인 실패", Toast.LENGTH_SHORT).show()
+                            }
+                            else if (token != null) {//로그인 성공
+                                //메인페이지 이동
+                                val myIntent = Intent(this,MainActivity::class.java)
+                                startActivity(myIntent)
+                                Toast.makeText(this, "카카오계정으로 로그인 성공", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }else{
+                        //카톡 앱에서 정보 가져오기
+                        UserApiClient.instance.me { user, error ->
+                            if (user != null) {
 
-//                    카톡 앱으로 로그인 되었을 때 할 코드
-                    getKakaoUserInfo()
+                                val email = user.kakaoAccount?.email.toString()
+                                val nick = user.kakaoAccount?.profile?.nickname.toString()
+                                val profileImage = user.kakaoAccount?.profile?.thumbnailImageUrl.toString()
+                                val phoneNumber = user.kakaoAccount?.phoneNumber.toString()
 
+                                Log.i("사용자 정보", "사용자 정보 요청 성공" +
+                                        "\n이메일: ${email}" +
+                                        "\n닉네임: ${nick}" +
+                                        "\n프로필사진: ${profileImage}" +
+                                        "\n휴대폰번호: ${phoneNumber}")
+
+                                //메인페이지 이동
+                                val myIntent = Intent(this,MainActivity::class.java)
+                                startActivity(myIntent)
+                                Toast.makeText(this, "카카오톡으로 로그인 성공", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
-
-            }
-            else{
-
-                Log.d("카톡로그인", "앱으로 로그인 불가 - 별도 로그인 필요")
-//                카카오 계정으로 로그인
+            } else{//카카오 계정으로 로그인
                 UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
-
-//                    카톡 앱이 없어서, 다른 방식으로 로그인 되었을 때 할 코드
-                    getKakaoUserInfo()
-
+                    if (error != null) {
+                        Toast.makeText(this, "카카오계정으로 로그인 실패", Toast.LENGTH_SHORT).show()
+                    }
+                    else if (token != null) {//로그인 성공
+                        //메인페이지 이동
+                        val myIntent = Intent(this,MainActivity::class.java)
+                        startActivity(myIntent)
+                        Toast.makeText(this, "카카오계정으로 로그인 성공", Toast.LENGTH_SHORT).show()
+                    }
                 }
-
             }
-
         }
 
 //        네이버 로고 클릭시 > 네이버 로그인
         binding.imgNaver.setOnClickListener {
-
             val oauthLoginCallback = object : OAuthLoginCallback {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 override fun onSuccess() {
-
                     // 네이버 로그인 API 호출 성공 시 유저 정보를 가져온다
                     NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
                         override fun onSuccess(result: NidProfileResponse) {
@@ -198,9 +230,24 @@ class LoginMainActivity : BaseActivity() {
 
 //        로그인 버튼 구현
         binding.btnLogin.setOnClickListener {
-
-            signinEmail()
-
+            var inputId = binding.edtInputId.text.toString()
+            var inputPw = binding.edtInputPw.text.toString()
+            Log.d(TAG, "@@@@ setupEvents: "+ inputId + ""+ inputPw)
+            if(inputId == "") {
+                if (inputPw == "") {
+                    Toast.makeText(mContext, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(mContext, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }else if (inputPw == "") {
+                if (inputId == "") {
+                    Toast.makeText(mContext, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(mContext, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                signinEmail(inputId, inputPw)
+            }
         }
 
     }
@@ -217,54 +264,21 @@ class LoginMainActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun getKakaoUserInfo() {
-
-        //        사용자 정보 요청 (기본)
-        UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                Log.e("사용자 정보", "사용자 정보 요청 실패", error)
-            }
-            else if (user != null) {
-
-                val email = user.kakaoAccount?.email.toString()
-                val nick = user.kakaoAccount?.profile?.nickname.toString()
-                val profileImage = user.kakaoAccount?.profile?.thumbnailImageUrl.toString()
-                val phoneNumber = user.kakaoAccount?.phoneNumber.toString()
-
-                Log.i("사용자 정보", "사용자 정보 요청 성공" +
-                        "\n이메일: ${email}" +
-                        "\n닉네임: ${nick}" +
-                        "\n프로필사진: ${profileImage}" +
-                        "\n휴대폰번호: ${phoneNumber}")
-
-            }
-        }
-
-        val myIntent = Intent(this,MainActivity::class.java)
-        startActivity(myIntent)
-
-        Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-
-    }
-
 //    이메일 로그인
-    fun signinEmail() {
+    fun signinEmail(id : String, pw : String) {
 
-        var inputId = binding.edtInputId.text.toString()
-        var inputPw = binding.edtInputPw.text.toString()
-        ContextUtil.setLoginId(this, inputId)
+        ContextUtil.setLoginId(this, id)
 
-    auth?.signInWithEmailAndPassword(inputId,inputPw)
+    auth?.signInWithEmailAndPassword(id,pw)
         ?.addOnCompleteListener {
                 task ->
             if(task.isSuccessful) {
                 // Login, 아이디와 패스워드가 맞았을 때
                 moveMainPage(task.result?.user)
-                Toast.makeText(this,inputId+"님 환영합니다", Toast.LENGTH_LONG).show()
-            }
-            else {
+                Toast.makeText(this,id+"님 환영합니다", Toast.LENGTH_LONG).show()
+            }else{
                 // Show the error message, 아이디와 패스워드가 틀렸을 때
-                Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"아이디와 비밀번호를 확인해주세요", Toast.LENGTH_LONG).show()
             }
         }
 
